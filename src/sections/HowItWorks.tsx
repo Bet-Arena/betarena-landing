@@ -35,6 +35,9 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
       return
     }
 
+    // Отмечаем что онбординг был обработан, чтобы не срабатывал при переходе на другие шаги
+    onboardingTriggeredRef.current = true
+
     // Всегда переходим на шаг 1 при показе онбординга (сбрасываем состояния)
     if (currentStep !== 1) {
       navigateToStep(1)
@@ -43,10 +46,9 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
     // Показываем онбординг после задержки (чтобы дать время для скролла и перехода на шаг 1)
     const timer = setTimeout(() => {
       const isMobile = window.innerWidth <= 768
-      if (isMobile && shouldShowOnboarding && !onboardingTriggeredRef.current) {
+      if (isMobile && shouldShowOnboarding) {
         // На мобилке показываем overlay для первого шага
         setShowMobileOverlay(true)
-        onboardingTriggeredRef.current = true
       }
     }, 1800) // Задержка для завершения скролла и перехода на шаг 1
 
