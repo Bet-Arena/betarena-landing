@@ -149,7 +149,6 @@ section {
   opacity: 1 !important;
   transform: translateY(0);
   visibility: visible;
-  animation: fadeInUp 0.8s ease-out forwards;
 }
 
 .section-title {
@@ -411,25 +410,6 @@ section {
 }
 
 /* Global Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 
 @keyframes scaleIn {
   from {
@@ -509,13 +489,11 @@ section {
 
 /* Animation Classes */
 .fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-  opacity: 0;
+  opacity: 1;
 }
 
 .fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
-  opacity: 0;
+  opacity: 1;
 }
 
 .scale-in {

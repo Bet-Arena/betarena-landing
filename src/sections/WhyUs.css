@@ -19,7 +19,6 @@
 .comparison-showcase.fade-in-up {
   opacity: 1;
   transform: translateY(0);
-  animation: fadeInUp 0.8s ease-out forwards;
 }
 
 .comparison-card-wrapper {
@@ -231,7 +230,6 @@
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
-  animation: fadeInUp 0.8s ease-out forwards;
 }
 
 /* Responsive */

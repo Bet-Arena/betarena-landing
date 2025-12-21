@@ -233,7 +233,6 @@
 }
 
 .step-visual .app-card {
-  animation: fadeInUp 0.8s ease-out;
 }
 
 .step-visual .app-card:hover {
