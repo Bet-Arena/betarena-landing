@@ -80,7 +80,6 @@
   .hero {
     padding: 0;
     min-height: 100vh;
-    min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
     display: flex;
     align-items: center;
     justify-content: center;

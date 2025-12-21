@@ -9,9 +9,8 @@
 
 .comparison-showcase {
   margin-bottom: 60px;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  opacity: 1;
+  transform: translateY(0);
   position: relative;
   z-index: 20;
 }
@@ -220,10 +219,9 @@
 .why-us-cta {
   text-align: center;
   margin-top: 60px;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  visibility: hidden;
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
 }
 
 .why-us-cta.fade-in-up {
