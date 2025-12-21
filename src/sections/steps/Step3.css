@@ -1,0 +1,366 @@
+/* Leaderboard Styles - Exact from frontend */
+.leaderboard-card {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 20px;
+  overflow: visible;
+}
+
+.leaderboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.leaderboard-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #e5e7eb;
+  line-height: 1.2;
+}
+
+.leaderboard-stats {
+  font-size: 14px;
+  color: #9ca3af;
+  margin-bottom: 16px;
+}
+
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: visible;
+}
+
+.leaderboard-item {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 12px;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.leaderboard-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.leaderboard-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.leaderboard-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.leaderboard-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.leaderboard-item:hover {
+  transform: translateX(8px);
+  border-color: var(--theme-primary);
+}
+
+.leaderboard-item.top {
+  background: rgba(15, 23, 42, 0.7);
+  border-color: #334155;
+}
+
+.leaderboard-item.current {
+  background: rgba(15, 23, 42, 0.7);
+  border-color: #334155;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+}
+
+.leaderboard-item.new-user {
+  background: rgba(0, 255, 106, 0.15);
+  border-color: #00FF6A;
+  box-shadow: 0 0 30px rgba(0, 255, 106, 0.4);
+  position: relative;
+  overflow: visible;
+  height: 0;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  border-width: 0;
+  transform: scale(0.95);
+  transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
+              margin 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              padding 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.05s,
+              border-width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+}
+
+.leaderboard-item.new-user > * {
+  opacity: 0;
+  transition: opacity 0.3s ease 0.2s;
+}
+
+.leaderboard-item.new-user.visible {
+  height: 66px;
+  opacity: 1;
+  margin: 0;
+  padding: 0 12px;
+  border-width: 1px;
+  transform: scale(1);
+}
+
+.leaderboard-item.new-user.visible > * {
+  opacity: 1;
+}
+
+.new-user-badge {
+  position: absolute;
+  top: -12px;
+  right: 12px;
+  background: linear-gradient(90deg, #00FF6A, #00E5A4);
+  color: var(--button-primary-text);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0, 255, 106, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease 0.3s;
+}
+
+.leaderboard-item.new-user.visible .new-user-badge {
+  opacity: 1;
+}
+
+.rank {
+  font-size: 16px;
+  font-weight: 500;
+  color: #e5e7eb;
+  width: 19px;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.avatar-fallback {
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+  color: #0a0a0a;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+}
+
+.user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.user-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #e5e7eb;
+  line-height: 1.2;
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-score {
+  font-size: 12px;
+  color: #e5e7eb;
+  line-height: 1.2;
+}
+
+.user-score-meta {
+  color: #9ca3af;
+  margin-left: 8px;
+}
+
+.medal-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pulsing animation for "Почему Betarena" button in Step 3 */
+.detailed-step[data-step="3"].active .step-content .btn-primary {
+  animation: pulseSoft 2s ease-in-out infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .leaderboard-card {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 18px;
+  }
+
+  .leaderboard-header {
+    margin-bottom: 16px;
+  }
+
+  .leaderboard-title {
+    font-size: 18px;
+  }
+
+  .leaderboard-stats {
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+
+  .leaderboard-list {
+    gap: 8px;
+  }
+
+  .leaderboard-item {
+    height: 60px;
+    padding: 0 10px;
+    gap: 10px;
+  }
+
+  .leaderboard-item.new-user.visible {
+    height: 60px;
+    padding: 0 10px;
+  }
+
+  .rank {
+    font-size: 15px;
+    width: 18px;
+  }
+
+  .avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .avatar-fallback {
+    font-size: 12px;
+  }
+
+  .user-name {
+    font-size: 15px;
+  }
+
+  .user-score {
+    font-size: 11px;
+  }
+
+  .user-score-meta {
+    margin-left: 6px;
+  }
+
+  .medal-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .new-user-badge {
+    font-size: 10px;
+    padding: 3px 10px;
+    top: -10px;
+    right: 10px;
+  }
+
+  /* Кнопка "Почему Betarena" на мобилке - показываем под лидербордом */
+  .step3-mobile-btn {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 24px;
+  }
+
+  .step3-desktop-btn {
+    display: none;
+  }
+}
+
+/* На десктопе показываем кнопку в step-content */
+@media (min-width: 769px) {
+  .step3-mobile-btn {
+    display: none;
+  }
+
+  .step3-desktop-btn {
+    display: inline-flex;
+  }
+}
+
+/* Onboarding Highlight Styles - Only for mobile */
+@media (max-width: 768px) {
+  .onboarding-highlight {
+    position: relative;
+    z-index: 1000;
+  }
+
+  .onboarding-highlight::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    pointer-events: none;
+    z-index: -1;
+    animation: onboardingPulse 2s ease-in-out infinite;
+  }
+
+  .onboarding-highlight::after {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    pointer-events: none;
+    z-index: -2;
+    animation: onboardingGlow 2s ease-in-out infinite;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6),
+                0 0 60px rgba(255, 255, 255, 0.4),
+                0 0 90px rgba(255, 255, 255, 0.2);
+  }
+
+  @keyframes onboardingPulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes onboardingGlow {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+}
+

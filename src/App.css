@@ -1,0 +1,596 @@
+@font-face {
+  font-family: 'Geist Sans';
+  src: url('/fonts/geist-sans/Geist-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Design System Variables from Figma */
+:root {
+  /* Primary Colors - Exact from Figma */
+  --theme-primary: #28C2FF;
+  --theme-primary-foreground: #ffffff;
+  --theme-primary-hover: #1ea8e6;
+
+  /* Gradient Colors - Exact from Figma */
+  --theme-gradient-start: #00D9FF;
+  --theme-gradient-end: #51ABFF;
+  --blue-linear: linear-gradient(90deg, rgba(0, 217, 255, 1) 0%, rgba(81, 171, 255, 1) 100%);
+  --blue-brand: #00285E;
+
+  /* Button Gradients - Exact from Figma */
+  --button-primary-gradient-start: #00D9FF;
+  --button-primary-gradient-end: #51ABFF;
+  --button-primary-text: #00285E;
+
+  /* Background Colors - Exact from Figma */
+  --bg-main: #0F172A;
+  --bg-card: #1A2C56;
+  --bg-card-alt: #162545;
+  --bg-card-dark: rgba(15, 23, 42, 0.9);
+  --bg-dark: #1e293b;
+  --bg-darker: #0f172a;
+  --bg-secondary: #13161B;
+
+  /* Border Colors - Exact from Figma */
+  --border-color: #334155;
+  --border-color-secondary: #373A41;
+  --border-color-hover: #475569;
+  --divider-color: #22262F;
+
+  /* Text Colors - Exact from Figma */
+  --text-primary: #F7F7F7;
+  --text-secondary: #94979C;
+  --text-muted: #94979C;
+  --text-gray: #94979C;
+  --text-button-secondary: #CECFD2;
+
+  /* Badge Colors */
+  --badge-bronze: #b45309;
+  --badge-silver: #78716c;
+  --badge-gold: #f59e0b;
+
+  /* Radius - Exact from Figma */
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-icon: 10px;
+
+  /* Spacing - Exact from Figma */
+  --spacing-container: 32px;
+  --spacing-section-hero: 64px 0px 96px;
+  --spacing-section-features: 96px 0px;
+  --gap-large: 64px;
+  --gap-medium: 32px;
+  --gap-small: 24px;
+  --gap-xs: 20px;
+  --gap-xxs: 16px;
+  --gap-tiny: 12px;
+  --gap-mini: 8px;
+
+  /* Effects - Exact from Figma */
+  --glow-blur: blur(160px);
+  --backdrop-blur: blur(12px);
+}
+
+/* Reset and Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.app {
+  min-height: 100vh;
+  position: relative;
+  /* Единый фон для всего приложения */
+  background-color: #0F172A;
+  background-image: url('/bg-auth.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-container);
+  position: relative;
+  z-index: 20;
+  overflow: visible;
+}
+
+/* AppCard - Base style from Figma */
+.app-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 24px;
+  position: relative;
+  z-index: 20;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.app-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  border-color: var(--theme-primary);
+}
+
+/* Section Styles - Base */
+section {
+  padding: var(--spacing-section-features);
+  position: relative;
+  overflow: visible;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+  opacity: 0 !important;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  visibility: hidden;
+  position: relative;
+  z-index: 20;
+}
+
+.section-header.fade-in-up {
+  opacity: 1 !important;
+  transform: translateY(0);
+  visibility: visible;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.section-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.2222222222222223em;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--gap-xxs);
+  color: var(--text-primary);
+}
+
+.section-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5em;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Buttons - Base styles */
+.btn-primary,
+.btn-secondary {
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--blue-linear);
+  color: var(--button-primary-text);
+  border: 2px solid var(--blue-brand);
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0px 1px 2px 0px rgba(255, 255, 255, 0),
+    inset 0px -2px 0px 0px rgba(12, 14, 18, 0.05),
+    inset 0px 0px 0px 1px rgba(12, 14, 18, 0.18);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 217, 255, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: var(--bg-card-dark);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-card);
+  border-color: var(--border-color-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.btn-large {
+  padding: 12px 32px;
+  font-size: 18px;
+  height: 48px;
+}
+
+.btn-small {
+  padding: 6px 12px;
+  font-size: 12px;
+  height: 32px;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
+  color: #00285E;
+  flex-shrink: 0;
+}
+
+/* Stop pulsing after click */
+.no-pulse {
+  animation: none !important;
+}
+
+/* Entry Level Card - Shared component */
+.entry-levels {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.entry-level-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.entry-level-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.entry-level-card:last-child {
+  border-color: #F97316;
+  border-width: 2px;
+}
+
+.entry-level-card:last-child:hover {
+  box-shadow: 0 12px 32px rgba(249, 115, 22, 0.3);
+}
+
+.entry-level-badge {
+  position: absolute;
+  top: 0;
+  right: 32px;
+  transform: translateY(-50%);
+  z-index: 20;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #FAFAFA;
+  background: var(--badge-bronze);
+}
+
+.entry-level-card:last-child .entry-level-badge {
+  background: var(--badge-gold);
+}
+
+.entry-level-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.entry-level-icon {
+  width: 65px;
+  height: 65px;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.entry-level-info {
+  flex: 1;
+  padding-top: 4px;
+}
+
+.entry-level-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.entry-level-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.entry-level-price {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+  padding-top: 4px;
+}
+
+.entry-level-card:last-child .entry-level-price {
+  color: #F97316;
+}
+
+/* Entry Level Card Responsive */
+@media (max-width: 768px) {
+  .entry-levels {
+    gap: 12px;
+  }
+
+  .entry-level-card {
+    padding: 12px;
+  }
+
+  .entry-level-content {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .entry-level-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 20px;
+  }
+
+  .entry-level-name {
+    font-size: 18px;
+  }
+
+  .entry-level-desc {
+    font-size: 13px;
+  }
+
+  .entry-level-price {
+    font-size: 15px;
+  }
+
+  .entry-level-badge {
+    right: 20px;
+    font-size: 11px;
+    padding: 2px 6px;
+  }
+}
+
+/* Global Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 217, 255, 0.4);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 8px rgba(0, 217, 255, 0);
+  }
+}
+
+@keyframes pulseSoft {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.95;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Animation Classes */
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.scale-in {
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+.delay-600 {
+  animation-delay: 0.6s;
+}
+
+/* Interactive Elements */
+.pulse-on-hover {
+  transition: all 0.3s ease;
+}
+
+.pulse-on-hover:hover {
+  animation: pulse 1s ease-in-out infinite;
+  box-shadow: 0 8px 30px rgba(0, 217, 255, 0.5);
+}
+
+/* Smooth Transitions for All Interactive Elements */
+a, button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  :root {
+    --spacing-container: 20px;
+    --spacing-section-hero: 48px 0px 64px;
+    --spacing-section-features: 64px 0px;
+  }
+
+  .container {
+    padding: 0 var(--spacing-container);
+  }
+
+  section {
+    padding: var(--spacing-section-features);
+  }
+
+  .section-header {
+    margin-bottom: 40px;
+  }
+
+  .section-title {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .section-subtitle {
+    font-size: 16px;
+  }
+
+  .app-card {
+    padding: 20px;
+  }
+
+  .btn-large {
+    width: 100%;
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+}

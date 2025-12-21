@@ -1,0 +1,320 @@
+/* Why Us Section */
+.why-us {
+  background: transparent;
+  padding: var(--spacing-section-features);
+  position: relative;
+  overflow: visible;
+  z-index: 10;
+}
+
+.comparison-showcase {
+  margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  position: relative;
+  z-index: 20;
+}
+
+.comparison-showcase.fade-in-up {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.comparison-card-wrapper {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 40px;
+  align-items: stretch;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.comparison-card-old,
+.comparison-card-new {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.comparison-card-old {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 68, 68, 0.2);
+  opacity: 0.7;
+}
+
+.comparison-card-new {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(26, 44, 86, 0.8) 100%);
+  border: 2px solid rgba(0, 217, 255, 0.4);
+  box-shadow: 0 20px 60px rgba(0, 217, 255, 0.2), inset 0 0 0 1px rgba(0, 217, 255, 0.1);
+}
+
+.comparison-card-glow {
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.3) 0%, rgba(81, 171, 255, 0.3) 100%);
+  border-radius: 24px;
+  filter: blur(20px);
+  opacity: 0.5;
+  z-index: -1;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.comparison-card-inner {
+  padding: 40px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.comparison-card-header-old,
+.comparison-card-header-new {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.comparison-subtitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.comparison-subtitle.new {
+  color: #00D9FF;
+  opacity: 0.9;
+}
+
+.comparison-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.comparison-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.comparison-feature-item.old {
+  opacity: 0.8;
+}
+
+.feature-marker {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all 0.3s ease;
+}
+
+.feature-marker.old {
+  background: rgba(255, 68, 68, 0.1);
+  color: #FF6B6B;
+  border: 1px solid rgba(255, 68, 68, 0.2);
+}
+
+.feature-marker.new {
+  background: rgba(0, 255, 106, 0.15);
+  color: #00FF6A;
+  border: 1px solid rgba(0, 255, 106, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 255, 106, 0.1);
+}
+
+.comparison-feature-item.new:hover .feature-marker.new {
+  background: rgba(0, 255, 106, 0.25);
+  border-color: rgba(0, 255, 106, 0.5);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 255, 106, 0.3);
+}
+
+.comparison-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.divider-line {
+  flex: 1;
+  width: 2px;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 217, 255, 0.3) 50%, transparent 100%);
+  min-height: 60px;
+}
+
+.divider-vs {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.2) 0%, rgba(81, 171, 255, 0.2) 100%);
+  border: 2px solid rgba(0, 217, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #00D9FF;
+  box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+  flex-shrink: 0;
+}
+
+.comparison-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.3em;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.comparison-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  width: fit-content;
+  transition: all 0.3s ease;
+}
+
+.comparison-badge-negative {
+  background: rgba(255, 68, 68, 0.15);
+  color: #FF6B6B;
+  border: 1px solid rgba(255, 68, 68, 0.2);
+}
+
+.comparison-badge-positive {
+  background: linear-gradient(90deg, rgba(0, 217, 255, 0.2) 0%, rgba(81, 171, 255, 0.2) 100%);
+  color: #00D9FF;
+  border: 1px solid rgba(0, 217, 255, 0.3);
+}
+
+/* Why Us CTA */
+.why-us-cta {
+  text-align: center;
+  margin-top: 60px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  visibility: hidden;
+}
+
+.why-us-cta.fade-in-up {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .comparison-showcase {
+    margin-bottom: 40px;
+  }
+
+  .comparison-card-wrapper {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .comparison-card-old {
+    order: 1;
+  }
+
+  .comparison-divider {
+    flex-direction: row;
+    width: 100%;
+    order: 2;
+    justify-content: center;
+    padding: 16px 0;
+  }
+
+  .divider-line {
+    width: 100%;
+    height: 2px;
+    min-height: auto;
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 217, 255, 0.3) 50%, transparent 100%);
+  }
+
+  .divider-vs {
+    width: 48px;
+    height: 48px;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .comparison-card-new {
+    order: 3;
+  }
+
+  .comparison-card-inner {
+    padding: 24px;
+    gap: 24px;
+  }
+
+  .comparison-card-header-old,
+  .comparison-card-header-new {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .comparison-title {
+    font-size: 22px;
+  }
+
+  .comparison-subtitle {
+    font-size: 13px;
+  }
+
+  .comparison-features-list {
+    gap: 16px;
+  }
+
+  .comparison-feature-item {
+    font-size: 14px;
+    gap: 12px;
+    min-height: auto;
+  }
+
+  .feature-marker {
+    width: 28px;
+    height: 28px;
+    margin-top: 2px;
+  }
+
+  .why-us-cta {
+    margin-top: 40px;
+  }
+
+  .why-us-cta .btn-primary {
+    width: 100%;
+  }
+}

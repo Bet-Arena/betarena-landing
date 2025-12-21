@@ -1,0 +1,396 @@
+/* Detailed Steps Section */
+.detailed-steps {
+  background: transparent;
+  padding: var(--spacing-section-features);
+  position: relative;
+  overflow: visible;
+  z-index: 5;
+}
+
+/* Step Navigation */
+.step-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 64px;
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.step-nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 24px;
+  background: transparent;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.step-nav-btn:hover:not(:disabled) {
+  border-color: var(--theme-primary);
+  transform: translateY(-2px);
+}
+
+.step-nav-btn.active {
+  border-color: var(--theme-primary);
+  background: rgba(40, 171, 255, 0.1);
+  box-shadow: 0 0 20px rgba(40, 171, 255, 0.3);
+}
+
+.step-nav-btn.completed {
+  border-color: var(--theme-primary);
+  background: rgba(40, 171, 255, 0.05);
+}
+
+.step-nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.step-nav-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.step-nav-btn.active .step-nav-number {
+  background: var(--blue-linear);
+  border-color: var(--theme-primary);
+  color: var(--blue-brand);
+  box-shadow: 0 0 15px rgba(40, 171, 255, 0.5);
+}
+
+.step-nav-btn.completed .step-nav-number {
+  background: var(--theme-primary);
+  border-color: var(--theme-primary);
+  color: var(--blue-brand);
+}
+
+.step-nav-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+.step-nav-btn.active .step-nav-label {
+  color: var(--text-primary);
+}
+
+.step-nav-line {
+  height: 2px;
+  background: var(--border-color);
+  width: 40px;
+  flex-shrink: 0;
+  transition: background 0.3s ease;
+}
+
+.step-nav-btn.completed + .step-nav-line {
+  background: var(--theme-primary);
+}
+
+/* Steps Container */
+.steps-container {
+  position: relative;
+  min-height: 600px;
+  overflow: visible;
+  width: 100vw;
+  left: 50%;
+  margin-left: -50vw;
+}
+
+.detailed-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 40px;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  max-width: 1440px;
+  padding: 0 var(--spacing-container);
+  box-sizing: border-box;
+  transform: translateX(calc(-50% + 100vw));
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 20;
+}
+
+/* Initial state for step 1 - only when active */
+.detailed-step.step-slide[data-step="1"].active {
+  transform: translateX(-50%);
+  opacity: 1;
+  visibility: visible;
+  position: absolute;
+  z-index: 15;
+}
+
+.detailed-step.step-slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%);
+  position: absolute;
+  z-index: 15;
+}
+
+/* Transition animations for steps */
+.steps-container.transitioning .detailed-step.step-slide:not(.active) {
+  animation: windBlow 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.steps-container.transitioning .detailed-step.step-slide.active {
+  animation: slideInFromRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* When going backwards, reverse the animation */
+.steps-container.transitioning[data-direction="back"] .detailed-step.step-slide.active {
+  animation: slideInFromLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Wind Effect Animation */
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(calc(-50% + 100vw)) scale(0.95);
+    opacity: 0;
+    filter: blur(10px);
+  }
+  50% {
+    filter: blur(5px);
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(calc(-50% - 100vw)) scale(0.95);
+    opacity: 0;
+    filter: blur(10px);
+  }
+  50% {
+    filter: blur(5px);
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes windBlow {
+  0% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(calc(-50% + 50px)) scale(0.9);
+    opacity: 0.5;
+    filter: blur(15px);
+  }
+  100% {
+    transform: translateX(calc(-50% + 100vw)) scale(0.8);
+    opacity: 0;
+    filter: blur(20px);
+  }
+}
+
+.detailed-step.reverse {
+  direction: rtl;
+}
+
+.detailed-step.reverse > * {
+  direction: ltr;
+}
+
+.step-visual {
+  position: relative;
+}
+
+.step-visual .app-card {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.step-visual .app-card:hover {
+  transform: translateY(-6px);
+}
+
+/* Step Content */
+.step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+}
+
+@media (min-width: 769px) {
+  .step-content {
+    position: relative;
+  }
+}
+
+.step-content-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Step 1 Visual Overlay - Облачко с подсветкой кнопки - ТОЛЬКО на мобилке */
+
+.step-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  background: var(--blue-linear);
+  color: var(--button-primary-text);
+  border-radius: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5em;
+  width: fit-content;
+}
+
+.step-heading {
+  font-family: 'Inter', sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.2222222222222223em;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.step-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5em;
+  color: var(--text-secondary);
+}
+
+.features-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-tiny);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5em;
+  color: var(--text-primary);
+}
+
+.feature-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--blue-linear);
+  color: var(--button-primary-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .detailed-steps {
+    padding: var(--spacing-section-features);
+    padding-bottom: 80px;
+  }
+
+  .step-navigation {
+    margin-bottom: 32px;
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 var(--spacing-container);
+  }
+
+  .step-nav-btn {
+    padding: 10px 12px;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .step-nav-number {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+
+  .step-nav-label {
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .step-nav-line {
+    width: 24px;
+    flex-shrink: 0;
+  }
+
+  .detailed-step {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0 var(--spacing-container);
+    position: relative;
+  }
+
+  .detailed-step.reverse {
+    direction: ltr;
+  }
+
+  .step-visual {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .step-content {
+    display: none; /* На мобилке скрываем текстовый контент, показывается в overlay */
+    order: 2;
+    gap: 20px;
+  }
+
+}
+

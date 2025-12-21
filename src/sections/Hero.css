@@ -1,0 +1,139 @@
+/* Hero Section */
+.hero {
+  position: relative;
+  padding: var(--spacing-section-hero);
+  overflow: visible;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  background: transparent;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 20;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeInUp 1s ease-out;
+}
+
+.hero-badge {
+  animation: fadeInUp 0.6s ease-out;
+  display: inline-block;
+  padding: 8px 16px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid #334155;
+  border-radius: 20px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(10px);
+}
+
+.badge-text {
+  font-size: 14px;
+  color: var(--theme-primary);
+  font-weight: 500;
+}
+
+.hero-title {
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+  font-family: 'Inter', sans-serif;
+  font-size: 60px;
+  font-weight: 600;
+  line-height: 1.2em;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--gap-small);
+  color: var(--text-primary);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--theme-gradient-start), var(--theme-gradient-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-description {
+  animation: fadeInUp 1s ease-out 0.4s both;
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5em;
+  color: var(--text-secondary);
+  margin-bottom: var(--gap-medium);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-cta {
+  animation: fadeInUp 1.2s ease-out 0.6s both;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+
+/* Pulsing animation for "Узнать больше" button in Hero */
+.hero-cta .btn-primary {
+  animation: pulseSoft 2s ease-in-out infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    padding: 0;
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero .container {
+    width: 100%;
+    padding: 0 var(--spacing-container);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    width: 100%;
+    padding: 40px 0;
+  }
+
+  .hero-badge {
+    padding: 6px 12px;
+    margin-bottom: 20px;
+  }
+
+  .badge-text {
+    font-size: 12px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .hero-description {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+
+  .hero-cta {
+    margin-bottom: 0;
+    gap: 12px;
+    flex-direction: column;
+  }
+
+  .hero-cta .btn-primary {
+    width: 100%;
+    max-width: 100%;
+  }
+}

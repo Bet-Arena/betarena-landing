@@ -1,0 +1,132 @@
+/* Footer */
+.footer {
+  background: transparent;
+  border-top: 1px solid rgba(85, 85, 85, 0.3);
+  padding: 48px 0;
+  position: relative;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-logo-section .logo-container {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.footer-logo-section .logo-container svg {
+  width: 26px;
+  height: 23px;
+}
+
+.footer-logo-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--text-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-links {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.footer-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--text-secondary);
+  transition: color 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.footer-link:hover {
+  color: var(--theme-primary);
+  transform: translateY(-2px);
+  background: rgba(40, 194, 255, 0.1);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(51, 65, 85, 0.3);
+  color: var(--text-muted);
+  font-size: 14px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 0 32px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  .footer-logo-section {
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  .footer-logo-section .logo-container {
+    width: 28px;
+    height: 28px;
+  }
+
+  .footer-logo-section .logo-container svg {
+    width: 24px;
+    height: 21px;
+  }
+
+  .footer-logo-text {
+    font-size: 16px;
+  }
+
+  .footer-links {
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .footer-link {
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer-link svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .footer-bottom {
+    padding-top: 24px;
+    font-size: 13px;
+  }
+}
