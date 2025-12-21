@@ -24,47 +24,38 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
     navigateToStep
   } = useStepNavigation()
 
-  const [showMobileOverlay, setShowMobileOverlay] = useState(false) // Controls mobile overlay visibility
-  const onboardingTriggeredRef = useRef(false) // To prevent re-triggering onboarding for step 1
+  const [showMobileOverlay, setShowMobileOverlay] = useState(false)
+  const [resetKey, setResetKey] = useState(0)
+  const lastOnboardingRef = useRef(false)
 
-
-  // Показываем онбординг когда shouldShowOnboarding = true (после нажатия кнопки "Узнать больше" в Hero)
+  // Показываем онбординг когда shouldShowOnboarding = true
   useEffect(() => {
-    // Этот эффект срабатывает ТОЛЬКО для первого шага при нажатии "Узнать больше"
-    if (!shouldShowOnboarding || onboardingTriggeredRef.current) {
-      return
-    }
+    if (shouldShowOnboarding && !lastOnboardingRef.current) {
+      lastOnboardingRef.current = true
 
-    // Отмечаем что онбординг был обработан, чтобы не срабатывал при переходе на другие шаги
-    onboardingTriggeredRef.current = true
-
-    // Всегда переходим на шаг 1 при показе онбординга (сбрасываем состояния)
-    if (currentStep !== 1) {
+      // Сбрасываем состояния
+      setResetKey(prev => prev + 1)
       navigateToStep(1)
+
+      // Показываем оверлей после скролла
+      setTimeout(() => {
+        if (window.innerWidth <= 768) {
+          setShowMobileOverlay(true)
+        }
+      }, 900)
     }
 
-    // Показываем онбординг после задержки (чтобы дать время для скролла и перехода на шаг 1)
-    const timer = setTimeout(() => {
-      const isMobile = window.innerWidth <= 768
-      if (isMobile && shouldShowOnboarding) {
-        // На мобилке показываем overlay для первого шага
-        setShowMobileOverlay(true)
-      }
-    }, 1800) // Задержка для завершения скролла и перехода на шаг 1
-
-    return () => clearTimeout(timer)
-  }, [shouldShowOnboarding, currentStep, navigateToStep])
+    if (!shouldShowOnboarding) {
+      lastOnboardingRef.current = false
+    }
+  }, [shouldShowOnboarding, navigateToStep])
 
   const handleBetConfirm = () => {
-    // Сначала скрываем текущий overlay
     setShowMobileOverlay(false)
     navigateToStep(3)
-    // После подтверждения ставки показываем overlay для шага 3 на мобилке
-    const isMobile = window.innerWidth <= 768
-    if (isMobile) {
-      setTimeout(() => {
-        setShowMobileOverlay(true)
-      }, 1500) // Задержка для завершения перехода на шаг 3
+
+    if (window.innerWidth <= 768) {
+      setTimeout(() => setShowMobileOverlay(true), 800)
     }
   }
 
@@ -74,17 +65,12 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
     setShowMobileOverlay(false)
   }
 
-  // Обработчик перехода на шаг 2 из шага 1 (Join Tournament)
   const handleNavigateToStep2 = () => {
-    // Сначала скрываем текущий overlay
     setShowMobileOverlay(false)
     navigateToStep(2)
-    // После перехода на шаг 2 показываем overlay для шага 2 на мобилке
-    const isMobile = window.innerWidth <= 768
-    if (isMobile) {
-      setTimeout(() => {
-        setShowMobileOverlay(true)
-      }, 1500) // Задержка для завершения перехода на шаг 2
+
+    if (window.innerWidth <= 768) {
+      setTimeout(() => setShowMobileOverlay(true), 800)
     }
   }
 
@@ -152,14 +138,17 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
           data-direction={currentStep > prevStep ? 'forward' : 'back'}
         >
           <Step1
+            key={`step1-${resetKey}`}
             isActive={currentStep === 1}
             onNavigate={handleNavigateToStep2}
           />
           <Step2
+            key={`step2-${resetKey}`}
             isActive={currentStep === 2}
             onBetConfirm={handleBetConfirm}
           />
           <Step3
+            key={`step3-${resetKey}`}
             isActive={currentStep === 3}
             showNewUser={showNewUser}
             onNavigate={onNavigate}
@@ -172,8 +161,8 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
             currentStep={currentStep}
             onClose={() => {
               setShowMobileOverlay(false)
-              if (currentStep === 1) {
-                onboardingTriggeredRef.current = false
+              if (onOnboardingShown) {
+                onOnboardingShown()
               }
             }}
             onOnboardingShown={onOnboardingShown}

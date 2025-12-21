@@ -128,7 +128,6 @@
   left: 50%;
   width: 100%;
   max-width: 1440px;
-  padding: 0 var(--spacing-container);
   box-sizing: border-box;
   transform: translateX(calc(-50% + 100%));
   opacity: 0;
@@ -233,10 +232,6 @@
 .step-visual .app-card {
 }
 
-.step-visual .app-card:hover {
-  transform: translateY(-6px);
-}
-
 /* Step Content */
 .step-content {
   display: flex;
@@ -336,7 +331,6 @@
     gap: 8px;
     width: 100%;
     max-width: 100%;
-    padding: 0 var(--spacing-container);
   }
 
   .step-nav-btn {
@@ -367,7 +361,6 @@
   .detailed-step {
     grid-template-columns: 1fr;
     gap: 0;
-    padding: 0 var(--spacing-container);
     position: relative;
   }
 

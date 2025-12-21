@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import './GlowEffect.css'
 
 interface GlowEffectProps {
@@ -23,16 +24,34 @@ export function GlowEffect({
   zIndex = 0,
   className = ''
 }: GlowEffectProps) {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // На мобилке уменьшаем размеры в 3.5 раза
+  const scale = isMobile ? 0.28 : 1
+  const scaledWidth = width * scale
+  const scaledHeight = height * scale
+  const scaledBlur = blur * scale
+
   const style: React.CSSProperties = {
     position: 'absolute',
-    width: `${width}px`,
-    height: `${height}px`,
+    width: `${scaledWidth}px`,
+    height: `${scaledHeight}px`,
     left: typeof left === 'number' ? `${left}px` : left,
     top: typeof top === 'number' ? `${top}px` : top,
     background: 'linear-gradient(45deg, #0017E4 0%, #3793FF 100%)',
-    opacity,
-    filter: `blur(${blur}px)`,
-    WebkitFilter: `blur(${blur}px)`,
+    opacity: isMobile ? opacity * 0.6 : opacity,
+    filter: `blur(${scaledBlur}px)`,
+    WebkitFilter: `blur(${scaledBlur}px)`,
     transform: `rotate(${rotation}deg)`,
     zIndex,
     pointerEvents: 'none'

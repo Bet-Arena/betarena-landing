@@ -5,6 +5,9 @@
   border-radius: 12px;
   padding: 20px;
   overflow: visible;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .leaderboard-header {
@@ -43,13 +46,11 @@
   align-items: center;
   padding: 0 12px;
   gap: 12px;
-  transition: all 0.3s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.leaderboard-item:hover {
-  transform: translateX(8px);
-  border-color: var(--theme-primary);
-}
 
 .leaderboard-item.top {
   background: rgba(15, 23, 42, 0.7);
