@@ -33,8 +33,6 @@ export function Header() {
             <a
               className={`header-btn-primary ${!appEnv.loginUrl ? 'is-disabled' : ''}`}
               href={appEnv.loginUrl ?? undefined}
-              target="_blank"
-              rel="noreferrer"
               aria-disabled={!appEnv.loginUrl}
               onClick={(event) => {
                 if (!appEnv.loginUrl) {

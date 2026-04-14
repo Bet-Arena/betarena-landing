@@ -133,8 +133,6 @@ export function WhyUs({ sectionRef, isVisible = {} }: WhyUsProps) {
           <a
             className={`btn-primary btn-large ${!appEnv.registerUrl ? 'is-disabled' : ''}`}
             href={appEnv.registerUrl ?? undefined}
-            target="_blank"
-            rel="noreferrer"
             aria-disabled={!appEnv.registerUrl}
             onClick={(event) => {
               if (!appEnv.registerUrl) {
