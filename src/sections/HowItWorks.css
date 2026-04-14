@@ -115,9 +115,7 @@
   position: relative;
   min-height: 600px;
   overflow: visible;
-  width: 100vw;
-  left: 50%;
-  margin-left: -50vw;
+  width: 100%;
 }
 
 .detailed-step {
@@ -128,11 +126,10 @@
   position: absolute;
   top: 0;
   left: 50%;
-  width: 100vw;
+  width: 100%;
   max-width: 1440px;
-  padding: 0 var(--spacing-container);
   box-sizing: border-box;
-  transform: translateX(calc(-50% + 100vw));
+  transform: translateX(calc(-50% + 100%));
   opacity: 0;
   visibility: hidden;
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -173,7 +170,7 @@
 /* Wind Effect Animation */
 @keyframes slideInFromRight {
   0% {
-    transform: translateX(calc(-50% + 100vw)) scale(0.95);
+    transform: translateX(calc(-50% + 100%)) scale(0.95);
     opacity: 0;
     filter: blur(10px);
   }
@@ -189,7 +186,7 @@
 
 @keyframes slideInFromLeft {
   0% {
-    transform: translateX(calc(-50% - 100vw)) scale(0.95);
+    transform: translateX(calc(-50% - 100%)) scale(0.95);
     opacity: 0;
     filter: blur(10px);
   }
@@ -214,7 +211,7 @@
     filter: blur(15px);
   }
   100% {
-    transform: translateX(calc(-50% + 100vw)) scale(0.8);
+    transform: translateX(calc(-50% + 100%)) scale(0.8);
     opacity: 0;
     filter: blur(20px);
   }
@@ -233,11 +230,6 @@
 }
 
 .step-visual .app-card {
-  animation: fadeInUp 0.8s ease-out;
-}
-
-.step-visual .app-card:hover {
-  transform: translateY(-6px);
 }
 
 /* Step Content */
@@ -339,7 +331,6 @@
     gap: 8px;
     width: 100%;
     max-width: 100%;
-    padding: 0 var(--spacing-container);
   }
 
   .step-nav-btn {
@@ -370,7 +361,6 @@
   .detailed-step {
     grid-template-columns: 1fr;
     gap: 0;
-    padding: 0 var(--spacing-container);
     position: relative;
   }
 

@@ -4,38 +4,18 @@ export function useIntersectionObserver() {
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({})
 
   useEffect(() => {
-    const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -80px 0px'
-    }
+    // Сразу делаем все элементы видимыми без анимаций
+    const elements = document.querySelectorAll('[data-section-id]')
+    const visibleState: Record<string, boolean> = {}
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('data-section-id')
-          if (id) {
-            setIsVisible((prev) => ({ ...prev, [id]: true }))
-            observer.unobserve(entry.target)
-          }
-        }
-      })
-    }, observerOptions)
+    elements.forEach((element) => {
+      const id = element.getAttribute('data-section-id')
+      if (id) {
+        visibleState[id] = true
+      }
+    })
 
-    const observeElements = () => {
-      const elements = document.querySelectorAll('[data-section-id]')
-      elements.forEach((element) => {
-        observer.observe(element)
-      })
-    }
-
-    const timeoutId1 = setTimeout(observeElements, 50)
-    const timeoutId2 = setTimeout(observeElements, 300)
-
-    return () => {
-      clearTimeout(timeoutId1)
-      clearTimeout(timeoutId2)
-      observer.disconnect()
-    }
+    setIsVisible(visibleState)
   }, [])
 
   return { isVisible }

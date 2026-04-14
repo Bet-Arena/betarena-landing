@@ -8,6 +8,9 @@
   box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
   padding: 16px;
   position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .match-league {
@@ -80,7 +83,6 @@
   gap: 24px;
   margin-bottom: 16px;
   position: relative;
-  animation: fadeInUp 0.6s ease-out;
 }
 
 .team {
@@ -129,35 +131,17 @@
   font-weight: 500;
   line-height: 1.25em;
   cursor: pointer;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.outcome-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.5s;
-}
 
-.outcome-btn:hover::before {
-  left: 100%;
-}
-
-.outcome-btn:hover {
-  background: #2e4a85;
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.3);
-}
 
 .outcome-btn.active {
   background: linear-gradient(90deg, var(--button-primary-gradient-start), var(--button-primary-gradient-end));
@@ -214,14 +198,6 @@
     inset 0px 0px 0px 1px rgba(12, 14, 18, 0.18);
 }
 
-.btn-confirm-bet:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-  box-shadow: 0px 1px 2px 0px rgba(255, 255, 255, 0),
-    inset 0px -2px 0px 0px rgba(12, 14, 18, 0.05),
-    inset 0px 0px 0px 1px rgba(12, 14, 18, 0.18),
-    0 4px 15px rgba(0, 255, 106, 0.3);
-}
 
 /* Pulsing animation for confirm bet button when step is active */
 .detailed-step.active .btn-confirm-bet {

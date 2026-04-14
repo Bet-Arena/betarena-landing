@@ -5,6 +5,9 @@
   border-radius: 12px;
   padding: 20px;
   overflow: visible;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .leaderboard-header {
@@ -43,31 +46,11 @@
   align-items: center;
   padding: 0 12px;
   gap: 12px;
-  transition: all 0.3s ease;
-  animation: fadeInUp 0.6s ease-out;
-  animation-fill-mode: both;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.leaderboard-item:nth-child(1) {
-  animation-delay: 0.1s;
-}
-
-.leaderboard-item:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.leaderboard-item:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-.leaderboard-item:nth-child(4) {
-  animation-delay: 0.4s;
-}
-
-.leaderboard-item:hover {
-  transform: translateX(8px);
-  border-color: var(--theme-primary);
-}
 
 .leaderboard-item.top {
   background: rgba(15, 23, 42, 0.7);
