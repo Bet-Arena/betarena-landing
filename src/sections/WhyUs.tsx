@@ -1,6 +1,8 @@
 import { GlowEffect } from '../components/ui/GlowEffect'
 import { CheckIcon } from '../components/ui/CheckIcon'
 import { CrossIcon } from '../components/ui/CrossIcon'
+import { appEnv } from '../config/env'
+import { useI18n } from '../i18n/useI18n'
 import './WhyUs.css'
 
 interface WhyUsProps {
@@ -9,6 +11,8 @@ interface WhyUsProps {
 }
 
 export function WhyUs({ sectionRef, isVisible = {} }: WhyUsProps) {
+  const { messages } = useI18n()
+
   return (
     <section
       className="why-us"
@@ -28,10 +32,8 @@ export function WhyUs({ sectionRef, isVisible = {} }: WhyUsProps) {
       />
       <div className="container">
         <div className={`section-header ${isVisible['why-us'] ? 'fade-in-up' : ''}`}>
-          <h2 className="section-title">Почему BETARENA?</h2>
-          <p className="section-subtitle">
-            Мы отличаемся от традиционных букмекеров
-          </p>
+          <h2 className="section-title">{messages.whyUs.title}</h2>
+          <p className="section-subtitle">{messages.whyUs.subtitle}</p>
         </div>
 
         <div className={`comparison-showcase ${isVisible['why-us'] ? 'fade-in-up delay-200' : ''}`}>
@@ -39,39 +41,39 @@ export function WhyUs({ sectionRef, isVisible = {} }: WhyUsProps) {
             <div className="comparison-card-old">
               <div className="comparison-card-inner">
                 <div className="comparison-card-header-old">
-                  <h3 className="comparison-title">Традиционные букмекеры</h3>
-                  <span className="comparison-subtitle">Winline и другие</span>
+                  <h3 className="comparison-title">{messages.whyUs.traditional.title}</h3>
+                  <span className="comparison-subtitle">{messages.whyUs.traditional.subtitle}</span>
                 </div>
                 <div className="comparison-features-list">
                   <div className="comparison-feature-item old">
                     <div className="feature-marker old">
                       <CrossIcon size={20} />
                     </div>
-                    <span>Риск потерять большие деньги на каждом матче</span>
+                    <span>{messages.whyUs.traditional.items[0]}</span>
                   </div>
                   <div className="comparison-feature-item old">
                     <div className="feature-marker old">
                       <CrossIcon size={20} />
                     </div>
-                    <span>Высокие минимальные ставки</span>
+                    <span>{messages.whyUs.traditional.items[1]}</span>
                   </div>
                   <div className="comparison-feature-item old">
                     <div className="feature-marker old">
                       <CrossIcon size={20} />
                     </div>
-                    <span>Нет соревновательного элемента</span>
+                    <span>{messages.whyUs.traditional.items[2]}</span>
                   </div>
                   <div className="comparison-feature-item old">
                     <div className="feature-marker old">
                       <CrossIcon size={20} />
                     </div>
-                    <span>Сложно начать новичкам</span>
+                    <span>{messages.whyUs.traditional.items[3]}</span>
                   </div>
                   <div className="comparison-feature-item old">
                     <div className="feature-marker old">
                       <CrossIcon size={20} />
                     </div>
-                    <span>Нет контроля над расходами</span>
+                    <span>{messages.whyUs.traditional.items[4]}</span>
                   </div>
                 </div>
               </div>
@@ -87,39 +89,39 @@ export function WhyUs({ sectionRef, isVisible = {} }: WhyUsProps) {
               <div className="comparison-card-glow"></div>
               <div className="comparison-card-inner">
                 <div className="comparison-card-header-new">
-                  <h3 className="comparison-title">BetArena</h3>
-                  <span className="comparison-subtitle new">Наш подход</span>
+                  <h3 className="comparison-title">{messages.whyUs.betarena.title}</h3>
+                  <span className="comparison-subtitle new">{messages.whyUs.betarena.subtitle}</span>
                 </div>
                 <div className="comparison-features-list">
                   <div className="comparison-feature-item new">
                     <div className="feature-marker new">
                       <CheckIcon size={20} />
                     </div>
-                    <span>Защита от больших потерь — фиксированный вступительный взнос</span>
+                    <span>{messages.whyUs.betarena.items[0]}</span>
                   </div>
                   <div className="comparison-feature-item new">
                     <div className="feature-marker new">
                       <CheckIcon size={20} />
                     </div>
-                    <span>Низкий порог входа — от $10</span>
+                    <span>{messages.whyUs.betarena.items[1]}</span>
                   </div>
                   <div className="comparison-feature-item new">
                     <div className="feature-marker new">
                       <CheckIcon size={20} />
                     </div>
-                    <span>Соревнование в лидерборде с другими участниками</span>
+                    <span>{messages.whyUs.betarena.items[2]}</span>
                   </div>
                   <div className="comparison-feature-item new">
                     <div className="feature-marker new">
                       <CheckIcon size={20} />
                     </div>
-                    <span>Простой и понятный интерфейс для всех</span>
+                    <span>{messages.whyUs.betarena.items[3]}</span>
                   </div>
                   <div className="comparison-feature-item new">
                     <div className="feature-marker new">
                       <CheckIcon size={20} />
                     </div>
-                    <span>Полный контроль над расходами</span>
+                    <span>{messages.whyUs.betarena.items[4]}</span>
                   </div>
                 </div>
               </div>
@@ -128,15 +130,22 @@ export function WhyUs({ sectionRef, isVisible = {} }: WhyUsProps) {
         </div>
 
         <div className={`why-us-cta ${isVisible['why-us'] ? 'fade-in-up delay-400' : ''}`}>
-          <button
-            className="btn-primary btn-large"
-            onClick={() => window.open('https://betarena.cc/auth/sign-up', '_blank')}
+          <a
+            className={`btn-primary btn-large ${!appEnv.registerUrl ? 'is-disabled' : ''}`}
+            href={appEnv.registerUrl ?? undefined}
+            target="_blank"
+            rel="noreferrer"
+            aria-disabled={!appEnv.registerUrl}
+            onClick={(event) => {
+              if (!appEnv.registerUrl) {
+                event.preventDefault()
+              }
+            }}
           >
-            Регистрация
-          </button>
+            {messages.whyUs.cta}
+          </a>
         </div>
       </div>
     </section>
   )
 }
-

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
+import { useI18n } from '../../i18n/useI18n'
 import './Step3.css'
 
 interface Step3Props {
   isActive: boolean
-  showNewUser: boolean
   onNavigate: (sectionId: string) => void
 }
 
@@ -66,40 +66,31 @@ const getMedalIcon = (rank: number) => {
   )
 }
 
-export function Step3({ isActive, showNewUser: _showNewUser, onNavigate }: Step3Props) {
+export function Step3({ isActive, onNavigate }: Step3Props) {
   const [buttonClicked, setButtonClicked] = useState(false)
   const [localShowNewUser, setLocalShowNewUser] = useState(false)
+  const { messages } = useI18n()
 
   const handleClick = () => {
     setButtonClicked(true)
     onNavigate('why-us')
   }
 
-  // Управление появлением нового участника
   useEffect(() => {
-    if (!isActive) {
-      // Сбросить состояние когда шаг неактивен
-      setLocalShowNewUser(false)
-      return
+    if (isActive) {
+      const timer = window.setTimeout(() => {
+        setLocalShowNewUser(true)
+      }, 800)
+
+      return () => window.clearTimeout(timer)
     }
-
-    // Сбрасываем состояние при переходе на шаг, чтобы участник появился с анимацией
-    setLocalShowNewUser(false)
-
-    // Когда шаг становится активным, сначала показываем только топ-3
-    // Потом через задержку показываем нового участника с анимацией
-    const timer = setTimeout(() => {
-      setLocalShowNewUser(true)
-    }, 800) // Задержка после перехода на шаг, чтобы пользователь увидел обычного участника сначала
-
-    return () => clearTimeout(timer)
   }, [isActive])
 
   const leaderboardEntries = [
-    { rank: 1, name: 'Игрок #1', score: 1250.00, correct: 45, total: 50 },
-    { rank: 2, name: 'Игрок #2', score: 1180.00, correct: 42, total: 50 },
-    { rank: 3, name: 'Игрок #3', score: 1120.00, correct: 40, total: 50 },
-    { rank: 42, name: 'Вы', score: 850.00, correct: 30, total: 50 },
+    { rank: 1, name: messages.steps.step3.players[0], score: 1250.00, correct: 45, total: 50 },
+    { rank: 2, name: messages.steps.step3.players[1], score: 1180.00, correct: 42, total: 50 },
+    { rank: 3, name: messages.steps.step3.players[2], score: 1120.00, correct: 40, total: 50 },
+    { rank: 42, name: messages.steps.step3.you, score: 850.00, correct: 30, total: 50 },
   ]
 
   return (
@@ -111,10 +102,10 @@ export function Step3({ isActive, showNewUser: _showNewUser, onNavigate }: Step3
       <div className="step-visual">
         <div className="app-card leaderboard-card">
           <div className="leaderboard-header">
-            <h3 className="leaderboard-title">Leaderboard</h3>
+            <h3 className="leaderboard-title">{messages.steps.leaderboardTitle}</h3>
           </div>
           <div className="leaderboard-stats">
-            Total participants: 1,234
+            {messages.steps.totalParticipants}
           </div>
           <div className="leaderboard-list">
             {leaderboardEntries.slice(0, 3).map((entry) => (
@@ -125,8 +116,8 @@ export function Step3({ isActive, showNewUser: _showNewUser, onNavigate }: Step3
                 <div className="user-info">
                   <p className="user-name">{entry.name}</p>
                   <p className="user-score">
-                    {formatPoints(entry.score)} points
-                    <span className="user-score-meta"> • {entry.correct} / {entry.total} correct</span>
+                    {formatPoints(entry.score)} {messages.steps.pointsLabel}
+                    <span className="user-score-meta"> • {entry.correct} / {entry.total} {messages.steps.correctLabel}</span>
                   </p>
                 </div>
                 {getMedalIcon(entry.rank)}
@@ -139,11 +130,11 @@ export function Step3({ isActive, showNewUser: _showNewUser, onNavigate }: Step3
               <div className="user-info">
                 <p className="user-name">{leaderboardEntries[3].name}</p>
                 <p className="user-score">
-                  {formatPoints(leaderboardEntries[3].score)} points
-                  <span className="user-score-meta"> • {leaderboardEntries[3].correct} / {leaderboardEntries[3].total} correct</span>
+                  {formatPoints(leaderboardEntries[3].score)} {messages.steps.pointsLabel}
+                  <span className="user-score-meta"> • {leaderboardEntries[3].correct} / {leaderboardEntries[3].total} {messages.steps.correctLabel}</span>
                 </p>
               </div>
-              <div className="new-user-badge">Новый участник!</div>
+              <div className="new-user-badge">{messages.steps.newParticipant}</div>
             </div>
           </div>
         </div>
@@ -151,39 +142,34 @@ export function Step3({ isActive, showNewUser: _showNewUser, onNavigate }: Step3
           className={`btn-primary step3-mobile-btn ${buttonClicked ? 'no-pulse' : ''}`}
           onClick={handleClick}
         >
-          Почему Betarena →
+          {messages.steps.whyBetarena}
         </button>
       </div>
       <div className="step-content">
-        <div className="step-badge">Шаг 3</div>
-        <h2 className="step-heading">Следите за лидербордом</h2>
-        <p className="step-text">
-          За каждый правильный прогноз вы получаете очки. Чем точнее ваш прогноз, тем больше очков вы зарабатываете.
-          Лидерборд обновляется в реальном времени после каждого завершенного матча. Топ игроки получают призы
-          из призового фонда турнира. Следите за своей позицией и стремитесь к вершине!
-        </p>
+        <div className="step-badge">{messages.steps.step3.badge}</div>
+        <h2 className="step-heading">{messages.steps.step3.heading}</h2>
+        <p className="step-text">{messages.steps.step3.text}</p>
         <ul className="features-list">
           <li className="feature-item">
             <span className="feature-icon">✓</span>
-            <span>Очки за каждый правильный прогноз</span>
+            <span>{messages.steps.step3.features[0]}</span>
           </li>
           <li className="feature-item">
             <span className="feature-icon">✓</span>
-            <span>Обновление рейтинга в реальном времени</span>
+            <span>{messages.steps.step3.features[1]}</span>
           </li>
           <li className="feature-item">
             <span className="feature-icon">✓</span>
-            <span>Призы для топ игроков</span>
+            <span>{messages.steps.step3.features[2]}</span>
           </li>
         </ul>
         <button
           className={`btn-primary step3-desktop-btn ${buttonClicked ? 'no-pulse' : ''}`}
           onClick={handleClick}
         >
-          Почему Betarena →
+          {messages.steps.whyBetarena}
         </button>
       </div>
     </div>
   )
 }
-

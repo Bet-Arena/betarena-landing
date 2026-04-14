@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header onNavigate={handleNavigate} />
+      <Header />
 
       <Hero onNavigate={handleNavigate} />
 
@@ -44,7 +44,7 @@ function App() {
         isVisible={isVisible}
       />
 
-      <Footer onNavigate={handleNavigate} />
+      <Footer />
       </div>
   )
 }

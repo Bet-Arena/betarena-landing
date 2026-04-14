@@ -4,7 +4,6 @@ export function useStepNavigation() {
   const [currentStep, setCurrentStep] = useState(1)
   const [prevStep, setPrevStep] = useState(1)
   const [isTransitioning, setIsTransitioning] = useState(false)
-  const [showNewUser, setShowNewUser] = useState(false)
 
   const navigateToStep = (step: number) => {
     if (isTransitioning || step === currentStep || step < 1 || step > 3) return
@@ -14,14 +13,6 @@ export function useStepNavigation() {
 
     setTimeout(() => {
       setCurrentStep(step)
-      if (step === 3) {
-        setTimeout(() => {
-          setShowNewUser(true)
-        }, 500)
-      } else {
-        setShowNewUser(false)
-      }
-
       setTimeout(() => {
         setIsTransitioning(false)
       }, 650)
@@ -32,8 +23,6 @@ export function useStepNavigation() {
     currentStep,
     prevStep,
     isTransitioning,
-    showNewUser,
     navigateToStep
   }
 }
-

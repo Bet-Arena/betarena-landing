@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useI18n } from '../../i18n/useI18n'
 import './StepOverlay.css'
 
 interface StepOverlayProps {
@@ -7,41 +8,14 @@ interface StepOverlayProps {
   onOnboardingShown?: () => void
 }
 
-const stepContent = {
-  1: {
-    badge: 'Шаг 1',
-    heading: 'Войдите в турнир',
-    text: 'Выберите интересующий вас турнир из списка доступных. Каждый турнир имеет свой призовой фонд, количество участников и длительность. Выберите уровень участия, который вам подходит — от начального до премиум. Вступительный взнос списывается с вашего баланса один раз при вступлении.',
-    features: [
-      'Разные уровни участия на любой бюджет',
-      'Прозрачные правила и условия',
-      'Мгновенный доступ после вступления',
-    ],
-  },
-  2: {
-    badge: 'Шаг 2',
-    heading: 'Делайте ставки',
-    text: 'После вступления в турнир вы получаете доступ ко всем матчам. Выберите матч, изучите доступные рынки (исход, счет, тотал голов и другие) и выберите исход, в который вы верите. Добавьте его в купон. Вы можете делать одиночные ставки или собирать экспрессы из нескольких исходов.',
-    features: [
-      'Множество рынков на каждый матч',
-      'Одиночные ставки и экспрессы',
-      'Простое добавление в купон одним кликом',
-    ],
-  },
-  3: {
-    badge: 'Шаг 3',
-    heading: 'Следите за лидербордом',
-    text: 'За каждый правильный прогноз вы получаете очки. Чем точнее ваш прогноз, тем больше очков вы зарабатываете. Лидерборд обновляется в реальном времени после каждого завершенного матча. Топ игроки получают призы из призового фонда турнира. Следите за своей позицией и стремитесь к вершине!',
-    features: [
-      'Очки за каждый правильный прогноз',
-      'Обновление рейтинга в реальном времени',
-      'Призы для топ игроков',
-    ],
-  },
-}
-
 export function StepOverlay({ currentStep, onClose, onOnboardingShown }: StepOverlayProps) {
-  const content = stepContent[currentStep as keyof typeof stepContent]
+  const { messages } = useI18n()
+  const contentByStep = {
+    1: messages.steps.step1,
+    2: messages.steps.step2,
+    3: messages.steps.step3,
+  }
+  const content = contentByStep[currentStep as keyof typeof contentByStep]
 
   // Блокируем скролл body когда overlay открыт
   useEffect(() => {
@@ -89,4 +63,3 @@ export function StepOverlay({ currentStep, onClose, onOnboardingShown }: StepOve
     </div>
   )
 }
-

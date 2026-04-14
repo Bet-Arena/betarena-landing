@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { GlowEffect } from '../components/ui/GlowEffect'
+import { useI18n } from '../i18n/useI18n'
 import './Hero.css'
 
 interface HeroProps {
@@ -8,11 +9,12 @@ interface HeroProps {
 
 export function Hero({ onNavigate }: HeroProps) {
   const [buttonClicked, setButtonClicked] = useState(false)
+  const { messages } = useI18n()
 
-      const handleClick = () => {
-        setButtonClicked(true)
-        onNavigate('how-it-works', true) // Передаем true для показа онбординга
-      }
+  const handleClick = () => {
+    setButtonClicked(true)
+    onNavigate('how-it-works', true)
+  }
 
   return (
     <section className="hero">
@@ -27,24 +29,24 @@ export function Hero({ onNavigate }: HeroProps) {
         zIndex={999}
       />
       <div className="container">
-        <div className="hero-content">
-          <div className="hero-badge">
-            <span className="badge-text">Новый подход к спортивным ставкам</span>
-          </div>
+          <div className="hero-content">
+            <div className="hero-badge">
+              <span className="badge-text">{messages.hero.badge}</span>
+            </div>
           <h1 className="hero-title">
-            Соревнуйтесь в турнирах,
+            {messages.hero.title}
             <br />
-            <span className="gradient-text">не рискуя большими деньгами</span>
+            <span className="gradient-text">{messages.hero.highlightedTitle}</span>
           </h1>
           <p className="hero-description">
-            Соревнуйтесь с другими участниками в турнирах.
+            {messages.hero.description}
           </p>
           <div className="hero-cta">
             <button
               className={`btn-primary btn-large ${buttonClicked ? 'no-pulse' : ''}`}
               onClick={handleClick}
             >
-              Узнать больше
+              {messages.hero.cta}
             </button>
           </div>
         </div>
@@ -52,4 +54,3 @@ export function Hero({ onNavigate }: HeroProps) {
     </section>
   )
 }
-

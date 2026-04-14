@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { useI18n } from '../../i18n/useI18n'
 import './Step1.css'
 
 interface Step1Props {
@@ -8,13 +9,8 @@ interface Step1Props {
 
 export function Step1({ isActive, onNavigate }: Step1Props) {
   const [buttonClicked, setButtonClicked] = useState(false)
-
-  // Сбрасываем состояние при переходе на этот шаг
-  useEffect(() => {
-    if (isActive) {
-      setButtonClicked(false)
-    }
-  }, [isActive])
+  const { messages } = useI18n()
+  const step = messages.steps.step1
 
   const handleClick = () => {
     setButtonClicked(true)
@@ -31,15 +27,15 @@ export function Step1({ isActive, onNavigate }: Step1Props) {
         <div className="app-card tournament-card">
           <div className="tournament-card-header">
             <div className="tournament-logo">
-              <div className="logo-placeholder">🏆</div>
-            </div>
-            <div className="tournament-info">
-              <h3 className="tournament-name">Champions League Final</h3>
-              <p className="tournament-subtitle">Predict the winner & score</p>
+            <div className="logo-placeholder">🏆</div>
+          </div>
+          <div className="tournament-info">
+              <h3 className="tournament-name">{step.card.title}</h3>
+              <p className="tournament-subtitle">{step.card.subtitle}</p>
               <div className="level-badges">
-                <span className="badge badge-bronze">Bronze</span>
-                <span className="badge badge-silver">Silver</span>
-                <span className="badge badge-gold">Gold</span>
+                <span className="badge badge-bronze">{step.card.levels[0]}</span>
+                <span className="badge badge-silver">{step.card.levels[1]}</span>
+                <span className="badge badge-gold">{step.card.levels[2]}</span>
               </div>
             </div>
           </div>
@@ -47,15 +43,15 @@ export function Step1({ isActive, onNavigate }: Step1Props) {
           <div className="tournament-stats">
             <div className="stat-box">
               <p className="stat-value">8,500$</p>
-              <p className="stat-label">prize pool</p>
+              <p className="stat-label">{step.card.prizePoolLabel}</p>
             </div>
             <div className="stat-box">
               <p className="stat-value">1,401</p>
-              <p className="stat-label">participants</p>
+              <p className="stat-label">{step.card.participantsLabel}</p>
             </div>
             <div className="stat-box">
               <p className="stat-value">2h 15min</p>
-              <p className="stat-label">duration</p>
+              <p className="stat-label">{step.card.durationLabel}</p>
             </div>
           </div>
           <button
@@ -65,32 +61,28 @@ export function Step1({ isActive, onNavigate }: Step1Props) {
             <svg className="btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M8.66667 0.666667L3.33333 9.33333H8L7.33333 15.3333L12.6667 6.66667H8L8.66667 0.666667Z" fill="currentColor"/>
             </svg>
-            Join Tournament
+            {step.card.join}
           </button>
-          <p className="tournament-end-date">Ends: Jun 18, 2026</p>
+          <p className="tournament-end-date">{step.card.ends}</p>
         </div>
       </div>
       <div className="step-content">
         <div className="step-content-inner">
-          <div className="step-badge">Шаг 1</div>
-          <h2 className="step-heading">Войдите в турнир</h2>
-          <p className="step-text">
-            Выберите интересующий вас турнир из списка доступных. Каждый турнир имеет свой призовой фонд,
-            количество участников и длительность. Выберите уровень участия, который вам подходит — от начального
-            до премиум. Вступительный взнос списывается с вашего баланса один раз при вступлении.
-          </p>
+          <div className="step-badge">{step.badge}</div>
+          <h2 className="step-heading">{step.heading}</h2>
+          <p className="step-text">{step.text}</p>
           <ul className="features-list">
             <li className="feature-item">
               <span className="feature-icon">✓</span>
-              <span>Разные уровни участия на любой бюджет</span>
+              <span>{step.features[0]}</span>
             </li>
             <li className="feature-item">
               <span className="feature-icon">✓</span>
-              <span>Прозрачные правила и условия</span>
+              <span>{step.features[1]}</span>
             </li>
             <li className="feature-item">
               <span className="feature-icon">✓</span>
-              <span>Мгновенный доступ после вступления</span>
+              <span>{step.features[2]}</span>
             </li>
           </ul>
         </div>
@@ -98,4 +90,3 @@ export function Step1({ isActive, onNavigate }: Step1Props) {
     </div>
   )
 }
-
