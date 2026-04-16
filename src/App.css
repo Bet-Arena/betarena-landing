@@ -101,8 +101,11 @@ html {
 
 .app::before {
   content: '';
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: #0F172A;
   background-image: url('/bg-auth.png');
   background-size: cover;
@@ -110,8 +113,6 @@ html {
   background-repeat: no-repeat;
   pointer-events: none;
   z-index: -1;
-  transform: translateZ(0);
-  will-change: transform;
 }
 
 .section-scroll-anchor {
