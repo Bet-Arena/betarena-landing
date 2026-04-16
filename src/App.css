@@ -90,7 +90,7 @@ html {
 .app {
   min-height: 100vh;
   position: relative;
-  background-color: #0F172A;
+  background-color: #ff0000;
   color: var(--text-primary);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -107,11 +107,8 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #0F172A;
-  background-image: url('/bg-auth.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: #ff0000;
+  background-image: none;
   pointer-events: none;
   z-index: -1;
 }
