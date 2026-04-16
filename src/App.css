@@ -114,18 +114,6 @@ html {
   will-change: transform;
 }
 
-.app::after {
-  content: '';
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: calc(env(safe-area-inset-bottom, 0px) + 88px);
-  background: #0F172A;
-  pointer-events: none;
-  z-index: -1;
-}
-
 .section-scroll-anchor {
   scroll-margin-top: var(--section-scroll-offset);
 }
