@@ -10,6 +10,7 @@
 :root {
   --header-height: 64px;
   --section-scroll-offset: 80px;
+  --safe-area-top: env(safe-area-inset-top, 0px);
   /* Primary Colors - Exact from Figma */
   --theme-primary: #28C2FF;
   --theme-primary-foreground: #ffffff;
