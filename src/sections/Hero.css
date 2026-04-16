@@ -1,5 +1,6 @@
 /* Hero Section */
 .hero {
+  --hero-overlay-offset: calc(var(--safe-area-top) + 64px);
   position: relative;
   padding: calc(var(--safe-area-top) + 64px) 0 96px;
   overflow: visible;
@@ -7,6 +8,21 @@
   display: flex;
   align-items: center;
   background: transparent;
+  isolation: isolate;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: calc(var(--hero-overlay-offset) * -1);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/bg-auth.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  z-index: 0;
 }
 
 .hero-content {
@@ -78,6 +94,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .hero {
+    --hero-overlay-offset: calc(var(--safe-area-top) + 72px);
     padding: calc(var(--safe-area-top) + 72px) 0 0;
     min-height: 100vh;
     display: flex;
