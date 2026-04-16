@@ -26,6 +26,11 @@ export function Hero({ onNavigate }: HeroProps) {
         rotation={30}
         opacity={0.4}
         blur={100}
+        mobileLeft="calc(50% + 20px)"
+        mobileTop={40}
+        mobileScale={0.72}
+        mobileOpacity={0.34}
+        mobileBlur={76}
         zIndex={999}
       />
       <div className="container">

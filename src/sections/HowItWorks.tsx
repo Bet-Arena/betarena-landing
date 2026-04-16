@@ -95,6 +95,11 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
         rotation={-15}
         opacity={0.35}
         blur={90}
+        mobileLeft="calc(50% - 180px)"
+        mobileTop="28%"
+        mobileScale={0.68}
+        mobileOpacity={0.28}
+        mobileBlur={64}
         zIndex={0}
       />
       <div className="container">

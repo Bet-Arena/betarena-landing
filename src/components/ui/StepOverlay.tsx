@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { useI18n } from '../../i18n/useI18n'
 import './StepOverlay.css'
 
@@ -19,17 +20,17 @@ export function StepOverlay({ currentStep, onClose, onOnboardingShown }: StepOve
 
   // Блокируем скролл body когда overlay открыт
   useEffect(() => {
-    // Просто блокируем overflow, без position: fixed
     const originalOverflow = document.body.style.overflow
     const originalHeight = document.body.style.height
 
     document.body.style.overflow = 'hidden'
     document.body.style.height = '100%'
+    document.body.classList.add('step-overlay-open')
 
     return () => {
-      // Просто восстанавливаем overflow
       document.body.style.overflow = originalOverflow
       document.body.style.height = originalHeight
+      document.body.classList.remove('step-overlay-open')
     }
   }, [])
 
@@ -42,7 +43,7 @@ export function StepOverlay({ currentStep, onClose, onOnboardingShown }: StepOve
     }
   }
 
-  return (
+  return createPortal(
     <div className="step-overlay-mobile" onClick={handleClose}>
       <div className="step-overlay-content" onClick={(e) => e.stopPropagation()}>
         <button className="step-overlay-close" onClick={handleClose}>×</button>
@@ -60,6 +61,7 @@ export function StepOverlay({ currentStep, onClose, onOnboardingShown }: StepOve
           </ul>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }

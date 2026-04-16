@@ -28,6 +28,11 @@ export function WhyUs({ sectionRef, isVisible = {} }: WhyUsProps) {
         rotation={45}
         opacity={0.4}
         blur={85}
+        mobileLeft="calc(50% - 10px)"
+        mobileTop="72%"
+        mobileScale={0.7}
+        mobileOpacity={0.3}
+        mobileBlur={60}
         zIndex={0}
       />
       <div className="container">
