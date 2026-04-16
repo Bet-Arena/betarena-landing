@@ -99,8 +99,9 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
       />
       <div className="container">
         <div
-          className={`section-header ${isVisible['how-it-works-header'] ? 'fade-in-up' : ''}`}
+          className={`section-header section-scroll-anchor ${isVisible['how-it-works-header'] ? 'fade-in-up' : ''}`}
           data-section-id="how-it-works-header"
+          data-scroll-anchor-for="how-it-works"
         >
           <h2 className="section-title">{messages.howItWorks.title}</h2>
           <p className="section-subtitle">{messages.howItWorks.subtitle}</p>

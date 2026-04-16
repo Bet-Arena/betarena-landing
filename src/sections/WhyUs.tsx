@@ -31,7 +31,10 @@ export function WhyUs({ sectionRef, isVisible = {} }: WhyUsProps) {
         zIndex={0}
       />
       <div className="container">
-        <div className={`section-header ${isVisible['why-us'] ? 'fade-in-up' : ''}`}>
+        <div
+          className={`section-header section-scroll-anchor ${isVisible['why-us'] ? 'fade-in-up' : ''}`}
+          data-scroll-anchor-for="why-us"
+        >
           <h2 className="section-title">{messages.whyUs.title}</h2>
           <p className="section-subtitle">{messages.whyUs.subtitle}</p>
         </div>

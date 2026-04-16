@@ -8,6 +8,8 @@
 
 /* Design System Variables from Figma */
 :root {
+  --header-height: 64px;
+  --section-scroll-offset: 80px;
   /* Primary Colors - Exact from Figma */
   --theme-primary: #28C2FF;
   --theme-primary-foreground: #ffffff;
@@ -99,6 +101,10 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+.section-scroll-anchor {
+  scroll-margin-top: var(--section-scroll-offset);
 }
 
 .container {
@@ -375,6 +381,11 @@ section {
 
 /* Entry Level Card Responsive */
 @media (max-width: 768px) {
+  :root {
+    --header-height: 72px;
+    --section-scroll-offset: 84px;
+  }
+
   .entry-levels {
     gap: 12px;
   }
@@ -410,6 +421,19 @@ section {
     right: 20px;
     font-size: 11px;
     padding: 2px 6px;
+  }
+}
+
+@media (max-width: 375px) and (max-height: 667px) {
+  :root {
+    --section-scroll-offset: 76px;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .app {
+    background-attachment: scroll;
+    background-position: center top;
   }
 }
 
