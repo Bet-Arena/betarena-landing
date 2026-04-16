@@ -89,19 +89,15 @@ html {
 
 .app {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: #0F172A;
+  position: relative;
+  background: transparent;
   color: var(--text-primary);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-}
-
-.app-main {
-  flex: 1;
+  isolation: isolate;
 }
 
 .section-scroll-anchor {
