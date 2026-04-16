@@ -78,20 +78,11 @@
 /* Responsive */
 @media (max-width: 768px) {
   .hero {
-    margin-top: calc((72px + var(--safe-area-top)) * -1);
-    padding: calc(72px + var(--safe-area-top)) 0 0;
+    padding: 0;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #0F172A;
-    background-image:
-      radial-gradient(ellipse 55% 45% at 72% 18%, rgba(0, 217, 255, 0.16), transparent 72%),
-      radial-gradient(ellipse 48% 38% at 24% 12%, rgba(81, 171, 255, 0.14), transparent 70%),
-      url('/bg-auth.png');
-    background-size: auto, auto, cover;
-    background-position: center, center, center top;
-    background-repeat: no-repeat;
   }
 
   .hero .container {
