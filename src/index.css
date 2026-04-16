@@ -15,7 +15,14 @@
 
   color-scheme: dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #ff0000;
+  background-color: #0F172A;
+  background-image:
+    radial-gradient(ellipse 55% 45% at 72% 18%, rgba(0, 217, 255, 0.16), transparent 72%),
+    radial-gradient(ellipse 48% 38% at 24% 12%, rgba(81, 171, 255, 0.14), transparent 70%),
+    url('/bg-auth.png');
+  background-size: auto, auto, cover;
+  background-position: center, center, center top;
+  background-repeat: no-repeat;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -34,11 +41,11 @@ body {
   min-width: 320px;
   min-height: 100vh;
   overflow-x: hidden;
-  background-color: #ff0000;
+  background: transparent;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
-  background-color: #ff0000;
+  background: transparent;
 }
