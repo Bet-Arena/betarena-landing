@@ -15,7 +15,7 @@
 
   color-scheme: dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #0F172A;
+  background-color: #ff0000;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -34,10 +34,11 @@ body {
   min-width: 320px;
   min-height: 100vh;
   overflow-x: hidden;
-  background-color: #0F172A;
+  background-color: #ff0000;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
+  background-color: #ff0000;
 }
