@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useStepNavigation } from '../hooks/useStepNavigation'
 import { GlowEffect } from '../components/ui/GlowEffect'
 import { StepOverlay } from '../components/ui/StepOverlay'
+import { useI18n } from '../i18n/useI18n'
 import './HowItWorks.css'
 import { Step1 } from './steps/Step1'
 import { Step2 } from './steps/Step2'
@@ -20,9 +21,9 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
     currentStep,
     prevStep,
     isTransitioning,
-    showNewUser,
     navigateToStep
   } = useStepNavigation()
+  const { messages } = useI18n()
 
   const [showMobileOverlay, setShowMobileOverlay] = useState(false)
   const [resetKey, setResetKey] = useState(0)
@@ -32,17 +33,22 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
   useEffect(() => {
     if (shouldShowOnboarding && !lastOnboardingRef.current) {
       lastOnboardingRef.current = true
-
-      // Сбрасываем состояния
-      setResetKey(prev => prev + 1)
-      navigateToStep(1)
+      const resetTimer = window.setTimeout(() => {
+        setResetKey((prev) => prev + 1)
+        navigateToStep(1)
+      }, 0)
 
       // Показываем оверлей после скролла
-      setTimeout(() => {
+      const overlayTimer = window.setTimeout(() => {
         if (window.innerWidth <= 768) {
           setShowMobileOverlay(true)
         }
       }, 900)
+
+      return () => {
+        window.clearTimeout(resetTimer)
+        window.clearTimeout(overlayTimer)
+      }
     }
 
     if (!shouldShowOnboarding) {
@@ -89,17 +95,21 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
         rotation={-15}
         opacity={0.35}
         blur={90}
+        mobileLeft="calc(50% - 180px)"
+        mobileTop="28%"
+        mobileScale={0.68}
+        mobileOpacity={0.28}
+        mobileBlur={64}
         zIndex={0}
       />
       <div className="container">
         <div
-          className={`section-header ${isVisible['how-it-works-header'] ? 'fade-in-up' : ''}`}
+          className={`section-header section-scroll-anchor ${isVisible['how-it-works-header'] ? 'fade-in-up' : ''}`}
           data-section-id="how-it-works-header"
+          data-scroll-anchor-for="how-it-works"
         >
-          <h2 className="section-title">Как это работает</h2>
-          <p className="section-subtitle">
-            Три простых шага от регистрации до победы в турнире
-          </p>
+          <h2 className="section-title">{messages.howItWorks.title}</h2>
+          <p className="section-subtitle">{messages.howItWorks.subtitle}</p>
         </div>
 
         {/* Step Navigation */}
@@ -110,7 +120,7 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
             disabled={isTransitioning}
           >
             <span className="step-nav-number">1</span>
-            <span className="step-nav-label">Войти в турнир</span>
+            <span className="step-nav-label">{messages.howItWorks.navigation[0]}</span>
           </button>
           <div className="step-nav-line"></div>
           <button
@@ -119,7 +129,7 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
             disabled={isTransitioning}
           >
             <span className="step-nav-number">2</span>
-            <span className="step-nav-label">Делать ставки</span>
+            <span className="step-nav-label">{messages.howItWorks.navigation[1]}</span>
           </button>
           <div className="step-nav-line"></div>
           <button
@@ -128,7 +138,7 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
             disabled={isTransitioning}
           >
             <span className="step-nav-number">3</span>
-            <span className="step-nav-label">Лидерборд</span>
+            <span className="step-nav-label">{messages.howItWorks.navigation[2]}</span>
           </button>
         </div>
 
@@ -138,19 +148,18 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
           data-direction={currentStep > prevStep ? 'forward' : 'back'}
         >
           <Step1
-            key={`step1-${resetKey}`}
+            key={`step1-${resetKey}-${currentStep}`}
             isActive={currentStep === 1}
             onNavigate={handleNavigateToStep2}
           />
           <Step2
-            key={`step2-${resetKey}`}
+            key={`step2-${resetKey}-${currentStep}`}
             isActive={currentStep === 2}
             onBetConfirm={handleBetConfirm}
           />
           <Step3
-            key={`step3-${resetKey}`}
+            key={`step3-${resetKey}-${currentStep}`}
             isActive={currentStep === 3}
-            showNewUser={showNewUser}
             onNavigate={onNavigate}
           />
         </div>
@@ -173,4 +182,3 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
     </section>
   )
 }
-

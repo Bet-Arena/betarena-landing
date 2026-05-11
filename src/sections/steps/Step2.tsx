@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { useI18n } from '../../i18n/useI18n'
 import './Step2.css'
 
 interface Step2Props {
@@ -10,15 +11,8 @@ export function Step2({ isActive, onBetConfirm }: Step2Props) {
   const [selectedOutcome, setSelectedOutcome] = useState<string | null>(null)
   const [selectedCoefficient, setSelectedCoefficient] = useState<string | null>(null)
   const [confirmClicked, setConfirmClicked] = useState(false)
-
-  // Сбрасываем состояние при переходе на другой шаг
-  useEffect(() => {
-    if (!isActive) {
-      setSelectedOutcome(null)
-      setSelectedCoefficient(null)
-      setConfirmClicked(false)
-    }
-  }, [isActive])
+  const { messages } = useI18n()
+  const step = messages.steps.step2
 
   const handleOutcomeClick = (outcome: string, coefficient: string) => {
     if (selectedOutcome === outcome) {
@@ -39,29 +33,29 @@ export function Step2({ isActive, onBetConfirm }: Step2Props) {
 
   return (
     <div
-      className={`detailed-step step-slide reverse ${isActive ? 'active' : ''}`}
+        className={`detailed-step step-slide reverse ${isActive ? 'active' : ''}`}
       data-section-id="step-2"
       data-step="2"
     >
       <div className="step-visual">
         <div className="app-card match-card">
-          <div className="match-league">Premier League</div>
+          <div className="match-league">{step.card.league}</div>
           <div className="match-live-badge">
             <span className="live-dot"></span>
-            <span>Live</span>
+            <span>{step.card.live}</span>
           </div>
           <div className="match-time-info">
-            <div className="match-date">Today</div>
+            <div className="match-date">{step.card.date}</div>
             <div className="match-time">17:30</div>
           </div>
           <div className="match-teams">
             <div className="team">
               <div className="team-logo">⚽</div>
-              <div className="team-name">Man. City</div>
+              <div className="team-name">{step.card.teams[0]}</div>
             </div>
             <div className="team">
               <div className="team-logo">⚽</div>
-              <div className="team-name">FC Chelsea</div>
+              <div className="team-name">{step.card.teams[1]}</div>
             </div>
           </div>
           <div className="match-outcomes">
@@ -90,36 +84,31 @@ export function Step2({ isActive, onBetConfirm }: Step2Props) {
                 className={`btn-primary btn-confirm-bet ${confirmClicked ? 'no-pulse' : ''}`}
                 onClick={handleConfirmClick}
               >
-                Сделать ставку ({selectedCoefficient})
+                {step.card.confirm} ({selectedCoefficient})
               </button>
             </div>
           )}
         </div>
       </div>
       <div className="step-content">
-        <div className="step-badge">Шаг 2</div>
-        <h2 className="step-heading">Делайте ставки</h2>
-        <p className="step-text">
-          После вступления в турнир вы получаете доступ ко всем матчам. Выберите матч, изучите доступные рынки
-          (исход, счет, тотал голов и другие) и выберите исход, в который вы верите. Добавьте его в купон.
-          Вы можете делать одиночные ставки или собирать экспрессы из нескольких исходов.
-        </p>
+        <div className="step-badge">{step.badge}</div>
+        <h2 className="step-heading">{step.heading}</h2>
+        <p className="step-text">{step.text}</p>
         <ul className="features-list">
           <li className="feature-item">
             <span className="feature-icon">✓</span>
-            <span>Множество рынков на каждый матч</span>
+            <span>{step.features[0]}</span>
           </li>
           <li className="feature-item">
             <span className="feature-icon">✓</span>
-            <span>Одиночные ставки и экспрессы</span>
+            <span>{step.features[1]}</span>
           </li>
           <li className="feature-item">
             <span className="feature-icon">✓</span>
-            <span>Простое добавление в купон одним кликом</span>
+            <span>{step.features[2]}</span>
           </li>
         </ul>
       </div>
     </div>
   )
 }
-

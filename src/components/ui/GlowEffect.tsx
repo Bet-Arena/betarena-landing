@@ -11,6 +11,11 @@ interface GlowEffectProps {
   blur?: number
   zIndex?: number
   className?: string
+  mobileLeft?: number | string
+  mobileTop?: number | string
+  mobileScale?: number
+  mobileOpacity?: number
+  mobileBlur?: number
 }
 
 export function GlowEffect({
@@ -22,7 +27,12 @@ export function GlowEffect({
   opacity = 0.45,
   blur = 80,
   zIndex = 0,
-  className = ''
+  className = '',
+  mobileLeft,
+  mobileTop,
+  mobileScale = 0.42,
+  mobileOpacity,
+  mobileBlur
 }: GlowEffectProps) {
   const [isMobile, setIsMobile] = useState(false)
 
@@ -36,20 +46,22 @@ export function GlowEffect({
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // На мобилке уменьшаем размеры в 3.5 раза
-  const scale = isMobile ? 0.28 : 1
+  const scale = isMobile ? mobileScale : 1
   const scaledWidth = width * scale
   const scaledHeight = height * scale
-  const scaledBlur = blur * scale
+  const scaledBlur = isMobile ? (mobileBlur ?? blur * scale) : blur
+  const resolvedLeft = isMobile && mobileLeft !== undefined ? mobileLeft : left
+  const resolvedTop = isMobile && mobileTop !== undefined ? mobileTop : top
+  const resolvedOpacity = isMobile ? (mobileOpacity ?? opacity * 0.7) : opacity
 
   const style: React.CSSProperties = {
     position: 'absolute',
     width: `${scaledWidth}px`,
     height: `${scaledHeight}px`,
-    left: typeof left === 'number' ? `${left}px` : left,
-    top: typeof top === 'number' ? `${top}px` : top,
+    left: typeof resolvedLeft === 'number' ? `${resolvedLeft}px` : resolvedLeft,
+    top: typeof resolvedTop === 'number' ? `${resolvedTop}px` : resolvedTop,
     background: 'linear-gradient(45deg, #0017E4 0%, #3793FF 100%)',
-    opacity: isMobile ? opacity * 0.6 : opacity,
+    opacity: resolvedOpacity,
     filter: `blur(${scaledBlur}px)`,
     WebkitFilter: `blur(${scaledBlur}px)`,
     transform: `rotate(${rotation}deg)`,
@@ -59,4 +71,3 @@ export function GlowEffect({
 
   return <div className={`glow-effect ${className}`} style={style} />
 }
-
