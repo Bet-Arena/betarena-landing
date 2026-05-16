@@ -328,13 +328,15 @@
 
   .step-navigation {
     margin-bottom: 32px;
-    gap: 8px;
+    gap: 4px;
     width: 100%;
     max-width: 100%;
+    padding: 0 var(--spacing-container);
+    align-items: stretch;
   }
 
   .step-nav-btn {
-    padding: 10px 12px;
+    padding: 10px 6px;
     gap: 6px;
     flex: 1;
     min-width: 0;
@@ -348,13 +350,12 @@
 
   .step-nav-label {
     font-size: 11px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    text-align: center;
+    display: block;
   }
 
   .step-nav-line {
-    width: 24px;
+    width: 16px;
     flex-shrink: 0;
   }
 
