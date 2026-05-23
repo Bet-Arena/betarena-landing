@@ -31,6 +31,7 @@ function App() {
           if (el) sectionsRef.current['why-us'] = el as HTMLDivElement
         }}
         isVisible={isVisible}
+        onNavigate={handleNavigate}
       />
 
       <HowItWorks

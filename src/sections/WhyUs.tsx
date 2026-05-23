@@ -1,16 +1,16 @@
 import { GlowEffect } from '../components/ui/GlowEffect'
 import { CheckIcon } from '../components/ui/CheckIcon'
 import { CrossIcon } from '../components/ui/CrossIcon'
-import { appEnv } from '../config/env'
 import { useI18n } from '../i18n/useI18n'
 import './WhyUs.css'
 
 interface WhyUsProps {
   sectionRef?: (el: HTMLDivElement | null) => void
   isVisible?: Record<string, boolean>
+  onNavigate?: (sectionId: string) => void
 }
 
-export function WhyUs({ sectionRef, isVisible = {} }: WhyUsProps) {
+export function WhyUs({ sectionRef, isVisible = {}, onNavigate }: WhyUsProps) {
   const { messages } = useI18n()
 
   return (
@@ -117,18 +117,12 @@ export function WhyUs({ sectionRef, isVisible = {} }: WhyUsProps) {
         </div>
 
         <div className={`why-us-cta ${isVisible['why-us'] ? 'fade-in-up delay-400' : ''}`}>
-          <a
-            className={`btn-primary btn-large ${!appEnv.registerUrl ? 'is-disabled' : ''}`}
-            href={appEnv.registerUrl ?? undefined}
-            aria-disabled={!appEnv.registerUrl}
-            onClick={(event) => {
-              if (!appEnv.registerUrl) {
-                event.preventDefault()
-              }
-            }}
+          <button
+            className="btn-primary btn-large"
+            onClick={() => onNavigate?.('how-it-works')}
           >
             {messages.whyUs.cta}
-          </a>
+          </button>
         </div>
       </div>
     </section>

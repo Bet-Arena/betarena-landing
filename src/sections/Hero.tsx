@@ -63,30 +63,33 @@ export function Hero({ onNavigate }: HeroProps) {
 
           <div className="hero-visuals">
             <div className="hero-trophy">🏆</div>
-            <div className="hero-flags">
-              {shuffledFlags.map((flag, i) => (
-                <span key={`${flag}-${i}`} className="hero-flag">{flag}</span>
-              ))}
+            <div className="hero-flags-container">
+              <div className="hero-flags">
+                {shuffledFlags.map((flag, i) => (
+                  <span key={`a-${flag}-${i}`} className="hero-flag">{flag}</span>
+                ))}
+                {shuffledFlags.map((flag, i) => (
+                  <span key={`b-${flag}-${i}`} className="hero-flag">{flag}</span>
+                ))}
+              </div>
             </div>
             <div className="hero-bracket">
-              <div className="bracket-stage">
-                <span className="bracket-label">Группы</span>
-                <span className="bracket-arrow">→</span>
-              </div>
-              <div className="bracket-stage">
-                <span className="bracket-label">1/8</span>
-                <span className="bracket-arrow">→</span>
-              </div>
-              <div className="bracket-stage">
-                <span className="bracket-label">1/4</span>
-                <span className="bracket-arrow">→</span>
-              </div>
-              <div className="bracket-stage">
-                <span className="bracket-label">1/2</span>
-                <span className="bracket-arrow">→</span>
-              </div>
-              <div className="bracket-stage final">
-                <span className="bracket-label">🏆 Финал</span>
+              <div className="bracket-track">
+                <div className="bracket-progress"></div>
+                <div className="bracket-stages">
+                  {[
+                    { label: 'Группы', step: '1' },
+                    { label: '1/8', step: '2' },
+                    { label: '1/4', step: '3' },
+                    { label: '1/2', step: '4' },
+                    { label: 'Финал', isFinal: true, icon: '🏆' },
+                  ].map((stage, i) => (
+                    <div key={i} className={`bracket-stage ${stage.isFinal ? 'final' : ''}`}>
+                      <div className="bracket-node">{stage.icon ?? stage.step}</div>
+                      <span className="bracket-label">{stage.label}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
