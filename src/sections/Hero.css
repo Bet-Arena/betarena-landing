@@ -98,10 +98,14 @@
 }
 
 .hero-trophy {
-  font-size: 64px;
-  line-height: 1;
-  filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.4));
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 24px rgba(251, 191, 36, 0.35));
   animation: trophyFloat 3s ease-in-out infinite;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
 }
 
 @keyframes trophyFloat {
@@ -380,7 +384,8 @@
   }
 
   .hero-trophy {
-    font-size: 48px;
+    width: 88px;
+    height: 88px;
   }
 
   .hero-flags-container {

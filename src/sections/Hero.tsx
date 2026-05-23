@@ -62,7 +62,12 @@ export function Hero({ onNavigate }: HeroProps) {
           </p>
 
           <div className="hero-visuals">
-            <div className="hero-trophy">🏆</div>
+            <img
+              className="hero-trophy"
+              src="/pngtree-the-fifa-world-cup-trophy-png-image_19941957-removebg-preview-Photoroom.png"
+              alt="FIFA World Cup 2026"
+              draggable={false}
+            />
             <div className="hero-flags-container">
               <div className="hero-flags">
                 {shuffledFlags.map((flag, i) => (
