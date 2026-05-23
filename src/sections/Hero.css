@@ -70,9 +70,100 @@
   flex-wrap: wrap;
 }
 
-/* Pulsing animation for "Узнать больше" button in Hero */
+/* Pulsing animation for CTA buttons in Hero */
 .hero-cta .btn-primary {
   animation: pulseSoft 2s ease-in-out infinite;
+}
+
+.hero-cta .btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.hero-cta .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-color-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+/* Hero Visuals */
+.hero-visuals {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.hero-trophy {
+  font-size: 64px;
+  line-height: 1;
+  filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.4));
+  animation: trophyFloat 3s ease-in-out infinite;
+}
+
+@keyframes trophyFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.hero-flags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 600px;
+}
+
+.hero-flag {
+  font-size: 28px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  transition: transform 0.2s ease;
+}
+
+.hero-flag:hover {
+  transform: scale(1.2);
+}
+
+.hero-bracket {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 12px 20px;
+  backdrop-filter: blur(8px);
+}
+
+.bracket-stage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bracket-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.bracket-stage.final .bracket-label {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+.bracket-arrow {
+  font-size: 14px;
+  color: var(--theme-primary);
+  opacity: 0.8;
 }
 
 /* Responsive */
@@ -126,8 +217,40 @@
     flex-direction: column;
   }
 
-  .hero-cta .btn-primary {
+  .hero-cta .btn-primary,
+  .hero-cta .btn-secondary {
     width: 100%;
     max-width: 100%;
+  }
+
+  .hero-visuals {
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .hero-trophy {
+    font-size: 48px;
+  }
+
+  .hero-flags {
+    gap: 6px;
+    max-width: 100%;
+  }
+
+  .hero-flag {
+    font-size: 22px;
+  }
+
+  .hero-bracket {
+    padding: 10px 14px;
+    gap: 6px;
+  }
+
+  .bracket-label {
+    font-size: 12px;
+  }
+
+  .bracket-arrow {
+    font-size: 12px;
   }
 }

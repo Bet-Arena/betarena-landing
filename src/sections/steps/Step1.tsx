@@ -42,7 +42,7 @@ export function Step1({ isActive, onNavigate }: Step1Props) {
           <div className="divider"></div>
           <div className="tournament-stats">
             <div className="stat-box">
-              <p className="stat-value">8,500$</p>
+              <p className="stat-value">25 000$</p>
               <p className="stat-label">{step.card.prizePoolLabel}</p>
             </div>
             <div className="stat-box">

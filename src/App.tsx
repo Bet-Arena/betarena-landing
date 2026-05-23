@@ -26,6 +26,13 @@ function App() {
       <Header />
       <Hero onNavigate={handleNavigate} />
 
+      <WhyUs
+        sectionRef={(el) => {
+          if (el) sectionsRef.current['why-us'] = el as HTMLDivElement
+        }}
+        isVisible={isVisible}
+      />
+
       <HowItWorks
         sectionRef={(el) => {
           if (el) sectionsRef.current['how-it-works'] = el as HTMLDivElement
@@ -34,13 +41,6 @@ function App() {
         isVisible={isVisible}
         shouldShowOnboarding={shouldShowOnboarding}
         onOnboardingShown={() => setShouldShowOnboarding(false)}
-      />
-
-      <WhyUs
-        sectionRef={(el) => {
-          if (el) sectionsRef.current['why-us'] = el as HTMLDivElement
-        }}
-        isVisible={isVisible}
       />
 
       <Footer />

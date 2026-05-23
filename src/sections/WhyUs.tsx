@@ -53,36 +53,14 @@ export function WhyUs({ sectionRef, isVisible = {} }: WhyUsProps) {
                   <span className="comparison-subtitle">{messages.whyUs.traditional.subtitle}</span>
                 </div>
                 <div className="comparison-features-list">
-                  <div className="comparison-feature-item old">
-                    <div className="feature-marker old">
-                      <CrossIcon size={20} />
+                  {messages.whyUs.traditional.items.map((item, i) => (
+                    <div key={i} className="comparison-feature-item old">
+                      <div className="feature-marker old">
+                        <CrossIcon size={20} />
+                      </div>
+                      <span>{item}</span>
                     </div>
-                    <span>{messages.whyUs.traditional.items[0]}</span>
-                  </div>
-                  <div className="comparison-feature-item old">
-                    <div className="feature-marker old">
-                      <CrossIcon size={20} />
-                    </div>
-                    <span>{messages.whyUs.traditional.items[1]}</span>
-                  </div>
-                  <div className="comparison-feature-item old">
-                    <div className="feature-marker old">
-                      <CrossIcon size={20} />
-                    </div>
-                    <span>{messages.whyUs.traditional.items[2]}</span>
-                  </div>
-                  <div className="comparison-feature-item old">
-                    <div className="feature-marker old">
-                      <CrossIcon size={20} />
-                    </div>
-                    <span>{messages.whyUs.traditional.items[3]}</span>
-                  </div>
-                  <div className="comparison-feature-item old">
-                    <div className="feature-marker old">
-                      <CrossIcon size={20} />
-                    </div>
-                    <span>{messages.whyUs.traditional.items[4]}</span>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -101,40 +79,41 @@ export function WhyUs({ sectionRef, isVisible = {} }: WhyUsProps) {
                   <span className="comparison-subtitle new">{messages.whyUs.betarena.subtitle}</span>
                 </div>
                 <div className="comparison-features-list">
-                  <div className="comparison-feature-item new">
-                    <div className="feature-marker new">
-                      <CheckIcon size={20} />
+                  {messages.whyUs.betarena.items.map((item, i) => (
+                    <div key={i} className="comparison-feature-item new">
+                      <div className="feature-marker new">
+                        <CheckIcon size={20} />
+                      </div>
+                      <span>{item}</span>
                     </div>
-                    <span>{messages.whyUs.betarena.items[0]}</span>
-                  </div>
-                  <div className="comparison-feature-item new">
-                    <div className="feature-marker new">
-                      <CheckIcon size={20} />
-                    </div>
-                    <span>{messages.whyUs.betarena.items[1]}</span>
-                  </div>
-                  <div className="comparison-feature-item new">
-                    <div className="feature-marker new">
-                      <CheckIcon size={20} />
-                    </div>
-                    <span>{messages.whyUs.betarena.items[2]}</span>
-                  </div>
-                  <div className="comparison-feature-item new">
-                    <div className="feature-marker new">
-                      <CheckIcon size={20} />
-                    </div>
-                    <span>{messages.whyUs.betarena.items[3]}</span>
-                  </div>
-                  <div className="comparison-feature-item new">
-                    <div className="feature-marker new">
-                      <CheckIcon size={20} />
-                    </div>
-                    <span>{messages.whyUs.betarena.items[4]}</span>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Tournament Schedule */}
+        <div className={`tournament-schedule ${isVisible['why-us'] ? 'fade-in-up delay-300' : ''}`}>
+          <div className="schedule-header">
+            <h3 className="schedule-title">{messages.whyUs.scheduleTitle}</h3>
+            <p className="schedule-subtitle">{messages.whyUs.scheduleSubtitle}</p>
+          </div>
+          <div className="schedule-grid">
+            {messages.whyUs.scheduleRows.map((row) => (
+              <div key={row.num} className={`schedule-row ${row.isFinal ? 'final' : ''}`}>
+                <div className="schedule-cell schedule-num">{row.num}</div>
+                <div className="schedule-cell schedule-name">
+                  {row.name}
+                  {row.isFinal && <span className="final-badge">{messages.whyUs.scheduleFinalBadge}</span>}
+                </div>
+                <div className="schedule-cell schedule-dates">{row.dates}</div>
+                <div className="schedule-cell schedule-fee">{row.fee}</div>
+                <div className="schedule-cell schedule-prize">{row.prize}</div>
+              </div>
+            ))}
+          </div>
+          <p className="schedule-prizes-note">{messages.whyUs.schedulePrizesNote}</p>
         </div>
 
         <div className={`why-us-cta ${isVisible['why-us'] ? 'fade-in-up delay-400' : ''}`}>
