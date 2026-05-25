@@ -38,7 +38,6 @@ function App() {
         sectionRef={(el) => {
           if (el) sectionsRef.current['how-it-works'] = el as HTMLDivElement
         }}
-        onNavigate={handleNavigate}
         isVisible={isVisible}
         shouldShowOnboarding={shouldShowOnboarding}
         onOnboardingShown={() => setShouldShowOnboarding(false)}

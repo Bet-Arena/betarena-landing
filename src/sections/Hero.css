@@ -9,6 +9,15 @@
   background: transparent;
 }
 
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 28%, rgba(2, 6, 23, 0.4) 0%, transparent 55%);
+  z-index: 10;
+  pointer-events: none;
+}
+
 .hero-content {
   position: relative;
   z-index: 20;
@@ -98,14 +107,84 @@
 }
 
 .hero-trophy {
-  width: 120px;
-  height: 120px;
+  position: absolute;
+  top: 200px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 320px;
+  height: 320px;
   object-fit: contain;
+  opacity: 0.35;
   filter: drop-shadow(0 0 24px rgba(251, 191, 36, 0.35));
   animation: trophyFloat 3s ease-in-out infinite;
   user-select: none;
   -webkit-user-select: none;
   pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes trophyFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Perimeter Flags */
+.hero-perimeter-flags {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-perimeter-flag {
+  position: absolute;
+  width: 64px;
+  height: auto;
+  opacity: 0.25;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+}
+
+/* Top edge — closer to center */
+.hero-perimeter-flag:nth-child(1) { top: 14%; left: 14%; }
+.hero-perimeter-flag:nth-child(2) { top: 10%; left: 36%; }
+.hero-perimeter-flag:nth-child(3) { top: 14%; left: 60%; }
+.hero-perimeter-flag:nth-child(4) { top: 10%; left: 82%; }
+
+/* Left edge — closer to center */
+.hero-perimeter-flag:nth-child(5) { top: 38%; left: 8%; }
+.hero-perimeter-flag:nth-child(6) { top: 62%; left: 10%; }
+
+/* Right edge — closer to center */
+.hero-perimeter-flag:nth-child(7) { top: 36%; right: 8%; }
+.hero-perimeter-flag:nth-child(8) { top: 60%; right: 10%; }
+
+/* Bottom edge — closer to center */
+.hero-perimeter-flag:nth-child(9)  { bottom: 14%; left: 16%; }
+.hero-perimeter-flag:nth-child(10) { bottom: 10%; left: 38%; }
+.hero-perimeter-flag:nth-child(11) { bottom: 14%; left: 62%; }
+.hero-perimeter-flag:nth-child(12) { bottom: 10%; left: 84%; }
+
+.hero-trophy {
+  position: absolute;
+  top: 340px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 310px;
+  height: 310px;
+  object-fit: contain;
+  opacity: 0.35;
+  filter: drop-shadow(0 0 24px rgba(251, 191, 36, 0.35));
+  animation: trophyFloat 3s ease-in-out infinite;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+  z-index: 1;
 }
 
 @keyframes trophyFloat {
@@ -384,28 +463,28 @@
   }
 
   .hero-trophy {
-    width: 88px;
-    height: 88px;
+    top: 180px;
+    width: 200px;
+    height: 200px;
   }
 
-  .hero-flags-container {
-    max-width: 100%;
-    padding: 10px 0;
+  .hero-perimeter-flag {
+    width: 22px;
+    opacity: 0.2;
   }
 
-  .hero-flags-container::before,
-  .hero-flags-container::after {
-    width: 40px;
-  }
-
-  .hero-flags {
-    gap: 14px;
-    animation-duration: 22s;
-  }
-
-  .hero-flag {
-    font-size: 22px;
-  }
+  .hero-perimeter-flag:nth-child(1) { top: 10%; left: 10%; }
+  .hero-perimeter-flag:nth-child(2) { display: none; }
+  .hero-perimeter-flag:nth-child(3) { top: 10%; left: 62%; }
+  .hero-perimeter-flag:nth-child(4) { display: none; }
+  .hero-perimeter-flag:nth-child(5) { top: 34%; left: 5%; }
+  .hero-perimeter-flag:nth-child(6) { display: none; }
+  .hero-perimeter-flag:nth-child(7) { top: 32%; right: 5%; }
+  .hero-perimeter-flag:nth-child(8) { display: none; }
+  .hero-perimeter-flag:nth-child(9)  { bottom: 10%; left: 12%; }
+  .hero-perimeter-flag:nth-child(10) { display: none; }
+  .hero-perimeter-flag:nth-child(11) { bottom: 10%; left: 64%; }
+  .hero-perimeter-flag:nth-child(12) { display: none; }
 
   .hero-bracket {
     padding: 20px 16px;
@@ -445,5 +524,9 @@
 
   .bracket-label {
     font-size: 11px;
+  }
+
+  .hero::before {
+    background: radial-gradient(circle at 50% 35%, rgba(2, 6, 23, 0.4) 0%, transparent 55%);
   }
 }

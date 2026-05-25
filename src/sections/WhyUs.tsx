@@ -99,17 +99,28 @@ export function WhyUs({ sectionRef, isVisible = {}, onNavigate }: WhyUsProps) {
             <h3 className="schedule-title">{messages.whyUs.scheduleTitle}</h3>
             <p className="schedule-subtitle">{messages.whyUs.scheduleSubtitle}</p>
           </div>
-          <div className="schedule-grid">
+          <div className="schedule-cards">
             {messages.whyUs.scheduleRows.map((row) => (
-              <div key={row.num} className={`schedule-row ${row.isFinal ? 'final' : ''}`}>
-                <div className="schedule-cell schedule-num">{row.num}</div>
-                <div className="schedule-cell schedule-name">
-                  {row.name}
-                  {row.isFinal && <span className="final-badge">{messages.whyUs.scheduleFinalBadge}</span>}
+              <div key={row.num} className={`schedule-card ${row.isFinal ? 'final' : ''}`}>
+                <div className="schedule-card-top">
+                  <span className="schedule-card-num">{row.num}</span>
+                  <div className="schedule-card-title-block">
+                    <span className="schedule-card-name">{row.name}</span>
+                    {row.isFinal && <span className="final-badge">{messages.whyUs.scheduleFinalBadge}</span>}
+                  </div>
                 </div>
-                <div className="schedule-cell schedule-dates">{row.dates}</div>
-                <div className="schedule-cell schedule-fee">{row.fee}</div>
-                <div className="schedule-cell schedule-prize">{row.prize}</div>
+                <div className="schedule-card-dates">📅 {row.dates}</div>
+                <div className="schedule-card-footer">
+                  <div className="schedule-card-fee">
+                    <span className="fee-label">Взнос</span>
+                    <span className={`fee-value ${row.fee === 'Бесплатно' || row.fee === 'Free' ? 'free' : 'paid'}`}>{row.fee}</span>
+                  </div>
+                  <div className="schedule-card-prize">
+                    <span className="prize-label">Приз</span>
+                    <span className="prize-value">{row.prize}</span>
+                    <span className="guaranteed-stamp">✓ Гарантировано</span>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

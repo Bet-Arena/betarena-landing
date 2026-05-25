@@ -50,11 +50,11 @@ export function Step2({ isActive, onBetConfirm }: Step2Props) {
           </div>
           <div className="match-teams">
             <div className="team">
-              <div className="team-logo">⚽</div>
+              <img className="team-logo" src="/flags/pt.png" alt="" draggable={false} />
               <div className="team-name">{step.card.teams[0]}</div>
             </div>
             <div className="team">
-              <div className="team-logo">⚽</div>
+              <img className="team-logo" src="/flags/ar.png" alt="" draggable={false} />
               <div className="team-name">{step.card.teams[1]}</div>
             </div>
           </div>

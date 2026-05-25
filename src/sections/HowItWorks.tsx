@@ -10,13 +10,13 @@ import { Step3 } from './steps/Step3'
 
 interface HowItWorksProps {
   sectionRef?: (el: HTMLDivElement | null) => void
-  onNavigate: (sectionId: string, showOnboarding?: boolean) => void
+
   isVisible?: Record<string, boolean>
   shouldShowOnboarding?: boolean
   onOnboardingShown?: () => void
 }
 
-export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowOnboarding = false, onOnboardingShown }: HowItWorksProps) {
+export function HowItWorks({ sectionRef, isVisible = {}, shouldShowOnboarding = false, onOnboardingShown }: HowItWorksProps) {
   const {
     currentStep,
     prevStep,
@@ -160,7 +160,6 @@ export function HowItWorks({ sectionRef, onNavigate, isVisible = {}, shouldShowO
           <Step3
             key={`step3-${resetKey}-${currentStep}`}
             isActive={currentStep === 3}
-            onNavigate={onNavigate}
           />
         </div>
 

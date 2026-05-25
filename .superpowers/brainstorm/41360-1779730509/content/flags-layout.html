@@ -1,0 +1,85 @@
+<h2>Варианты размещения флагов в Hero-секции</h2>
+<p class="subtitle">Какой подход вам ближе? Кликните для выбора.</p>
+
+<div class="options">
+  <div class="option" data-choice="scattered" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Хаотично разбросанные</h3>
+      <p>Флаги в случайных позициях по всей секции — сверху, снизу, по бокам. Естественный, неформальный вид.</p>
+      <div class="mockup" style="margin-top:12px; padding:12px; background:#0b1120;">
+        <div style="position:relative; height:120px; border:1px dashed #334155; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:13px;">
+          <span style="position:absolute; top:8px; left:20px; font-size:16px;">🇺🇸</span>
+          <span style="position:absolute; top:40px; right:30px; font-size:16px;">🇧🇷</span>
+          <span style="position:absolute; bottom:15px; left:50%; transform:translateX(-50%); font-size:16px;">🇫🇷</span>
+          <span style="position:absolute; top:15px; left:45%; font-size:16px;">🇩🇪</span>
+          <span style="position:absolute; bottom:30px; right:15px; font-size:16px;">🇯🇵</span>
+          <span style="position:absolute; top:60px; left:10px; font-size:16px;">🇦🇷</span>
+          <div>Hero текст</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="bordered" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>По периметру (рамка)</h3>
+      <p>Флаги по краям секции — сверху, снизу, по бокам. Центр чистый для текста и кубка.</p>
+      <div class="mockup" style="margin-top:12px; padding:12px; background:#0b1120;">
+        <div style="position:relative; height:120px; border:1px dashed #334155; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:13px;">
+          <span style="position:absolute; top:4px; left:15px; font-size:16px;">🇺🇸</span>
+          <span style="position:absolute; top:4px; left:40%; font-size:16px;">🇩🇪</span>
+          <span style="position:absolute; top:4px; right:15px; font-size:16px;">🇧🇷</span>
+          <span style="position:absolute; bottom:4px; left:20px; font-size:16px;">🇫🇷</span>
+          <span style="position:absolute; bottom:4px; right:25px; font-size:16px;">🇯🇵</span>
+          <span style="position:absolute; top:40%; left:4px; font-size:16px;">🇦🇷</span>
+          <span style="position:absolute; top:40%; right:4px; font-size:16px;">🇪🇸</span>
+          <div>Hero текст</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="top-bottom" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Только сверху и снизу</h3>
+      <p>Флаги вдоль верхней и нижней границы секции. Бока свободны — чистый центр.</p>
+      <div class="mockup" style="margin-top:12px; padding:12px; background:#0b1120;">
+        <div style="position:relative; height:120px; border:1px dashed #334155; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:13px;">
+          <span style="position:absolute; top:4px; left:20px; font-size:16px;">🇺🇸</span>
+          <span style="position:absolute; top:4px; left:45%; font-size:16px;">🇩🇪</span>
+          <span style="position:absolute; top:4px; right:25px; font-size:16px;">🇧🇷</span>
+          <span style="position:absolute; bottom:4px; left:30px; font-size:16px;">🇫🇷</span>
+          <span style="position:absolute; bottom:4px; right:20px; font-size:16px;">🇯🇵</span>
+          <div>Hero текст</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px;">
+  <p class="subtitle">Дополнительно: какой размер флагов?</p>
+  <div class="options" data-multiselect>
+    <div class="option" data-choice="small" onclick="toggleSelect(this)">
+      <div class="content">
+        <h3>Маленькие</h3>
+        <p>20–24px — декоративный акцент, не отвлекают</p>
+      </div>
+    </div>
+    <div class="option" data-choice="medium" onclick="toggleSelect(this)">
+      <div class="content">
+        <h3>Средние</h3>
+        <p>28–32px — заметнее, но не доминируют</p>
+      </div>
+    </div>
+    <div class="option" data-choice="large" onclick="toggleSelect(this)">
+      <div class="content">
+        <h3>Крупные</h3>
+        <p>36–40px — яркий фоновый элемент</p>
+      </div>
+    </div>
+  </div>
+</div>

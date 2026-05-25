@@ -8,7 +8,20 @@ interface HeroProps {
   onNavigate: (sectionId: string, showOnboarding?: boolean) => void
 }
 
-const FLAGS = ['🇺🇸', '🇨🇦', '🇲🇽', '🇧🇷', '🇦🇷', '🇩🇪', '🇫🇷', '🇪🇸', '🇮🇹', '🇳🇱', '🇵🇹', '🏴󠁧󠁢󠁥󠁮󠁧󠁿', '🇧🇪', '🇭🇷', '🇲🇦', '🇯🇵', '🇰🇷', '🇦🇺']
+const FLAGS = [
+  '/flags/us.png',
+  '/flags/ca.png',
+  '/flags/mx.png',
+  '/flags/br.png',
+  '/flags/ar.png',
+  '/flags/de.png',
+  '/flags/fr.png',
+  '/flags/es.png',
+  '/flags/it.png',
+  '/flags/gb.png',
+  '/flags/jp.png',
+  '/flags/au.png',
+]
 
 function shuffleArray<T>(array: T[]): T[] {
   const arr = [...array]
@@ -47,6 +60,23 @@ export function Hero({ onNavigate }: HeroProps) {
         mobileBlur={76}
         zIndex={999}
       />
+      <img
+        className="hero-trophy"
+        src="/pngtree-the-fifa-world-cup-trophy-png-image_19941957-removebg-preview-Photoroom.png"
+        alt="FIFA World Cup 2026"
+        draggable={false}
+      />
+      <div className="hero-perimeter-flags">
+        {shuffledFlags.map((flag, i) => (
+          <img
+            key={`f-${i}`}
+            className="hero-perimeter-flag"
+            src={flag}
+            alt=""
+            draggable={false}
+          />
+        ))}
+      </div>
       <div className="container">
         <div className="hero-content">
           <div className="hero-badge">
@@ -62,22 +92,6 @@ export function Hero({ onNavigate }: HeroProps) {
           </p>
 
           <div className="hero-visuals">
-            <img
-              className="hero-trophy"
-              src="/pngtree-the-fifa-world-cup-trophy-png-image_19941957-removebg-preview-Photoroom.png"
-              alt="FIFA World Cup 2026"
-              draggable={false}
-            />
-            <div className="hero-flags-container">
-              <div className="hero-flags">
-                {shuffledFlags.map((flag, i) => (
-                  <span key={`a-${flag}-${i}`} className="hero-flag">{flag}</span>
-                ))}
-                {shuffledFlags.map((flag, i) => (
-                  <span key={`b-${flag}-${i}`} className="hero-flag">{flag}</span>
-                ))}
-              </div>
-            </div>
             <div className="hero-bracket">
               <div className="bracket-track">
                 <div className="bracket-progress"></div>
