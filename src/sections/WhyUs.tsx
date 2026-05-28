@@ -1,3 +1,4 @@
+import { Gauge, ListChecks, SlidersHorizontal } from 'lucide-react'
 import { GlowEffect } from '../components/ui/GlowEffect'
 import { CheckIcon } from '../components/ui/CheckIcon'
 import { CrossIcon } from '../components/ui/CrossIcon'
@@ -9,6 +10,8 @@ interface WhyUsProps {
   isVisible?: Record<string, boolean>
   onNavigate?: (sectionId: string) => void
 }
+
+const SCHEDULE_RULE_ICONS = [ListChecks, Gauge, SlidersHorizontal]
 
 export function WhyUs({ sectionRef, isVisible = {}, onNavigate }: WhyUsProps) {
   const { messages } = useI18n()
@@ -99,6 +102,31 @@ export function WhyUs({ sectionRef, isVisible = {}, onNavigate }: WhyUsProps) {
             <h3 className="schedule-title">{messages.whyUs.scheduleTitle}</h3>
             <p className="schedule-subtitle">{messages.whyUs.scheduleSubtitle}</p>
           </div>
+          <div className="schedule-rules">
+            <div className="schedule-rules-header">
+              <div className="schedule-rules-title">{messages.whyUs.scheduleRulesTitle}</div>
+              <div className="schedule-rules-status">
+                <span />
+                {messages.whyUs.scheduleRows.length}
+              </div>
+            </div>
+            <div className="schedule-rules-list">
+              {messages.whyUs.scheduleRules.map((rule, index) => (
+                <div key={rule} className="schedule-rule">
+                  <div className="schedule-rule-icon">
+                    {(() => {
+                      const Icon = SCHEDULE_RULE_ICONS[index] ?? SlidersHorizontal
+                      return <Icon size={17} strokeWidth={2} />
+                    })()}
+                  </div>
+                  <div className="schedule-rule-copy">
+                    <span className="schedule-rule-index">0{index + 1}</span>
+                    <span>{rule}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
           <div className="schedule-cards">
             {messages.whyUs.scheduleRows.map((row) => (
               <div key={row.num} className={`schedule-card ${row.isFinal ? 'final' : ''}`}>
@@ -112,13 +140,13 @@ export function WhyUs({ sectionRef, isVisible = {}, onNavigate }: WhyUsProps) {
                 <div className="schedule-card-dates">📅 {row.dates}</div>
                 <div className="schedule-card-footer">
                   <div className="schedule-card-fee">
-                    <span className="fee-label">Взнос</span>
+                    <span className="fee-label">{messages.whyUs.scheduleHeader[2]}</span>
                     <span className={`fee-value ${row.fee === 'Бесплатно' || row.fee === 'Free' ? 'free' : 'paid'}`}>{row.fee}</span>
                   </div>
                   <div className="schedule-card-prize">
-                    <span className="prize-label">Приз</span>
+                    <span className="prize-label">{messages.whyUs.scheduleHeader[3]}</span>
                     <span className="prize-value">{row.prize}</span>
-                    <span className="guaranteed-stamp">✓ Гарантировано</span>
+                    <span className="guaranteed-stamp">{messages.whyUs.scheduleGuaranteeStamp}</span>
                   </div>
                 </div>
               </div>

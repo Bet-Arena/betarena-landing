@@ -8,28 +8,160 @@ interface HeroProps {
   onNavigate: (sectionId: string, showOnboarding?: boolean) => void
 }
 
-const FLAGS = [
-  '/flags/us.png',
-  '/flags/ca.png',
-  '/flags/mx.png',
-  '/flags/br.png',
-  '/flags/ar.png',
-  '/flags/de.png',
-  '/flags/fr.png',
-  '/flags/es.png',
-  '/flags/it.png',
-  '/flags/gb.png',
-  '/flags/jp.png',
-  '/flags/au.png',
+const LEFT_BRACKET_FLAGS = [
+  ['/flags/fr.png', '/flags/hr.png'],
+  ['/flags/gb.png', '/flags/de.png'],
+  ['/flags/br.png', '/flags/mx.png'],
+  ['/flags/pt.png', '/flags/au.png'],
+  ['/flags/be.png', '/flags/it.png'],
+  ['/flags/es.png', '/flags/ca.png'],
+  ['/flags/nl.png', '/flags/ma.png'],
+  ['/flags/us.png', '/flags/jp.png'],
 ]
 
-function shuffleArray<T>(array: T[]): T[] {
-  const arr = [...array]
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]]
+const RIGHT_BRACKET_FLAGS = [
+  ['/flags/ar.png', '/flags/nl.png'],
+  ['/flags/us.png', '/flags/ca.png'],
+  ['/flags/ma.png', '/flags/es.png'],
+  ['/flags/jp.png', '/flags/kr.png'],
+  ['/flags/de.png', '/flags/it.png'],
+  ['/flags/br.png', '/flags/pt.png'],
+  ['/flags/fr.png', '/flags/be.png'],
+  ['/flags/mx.png', '/flags/au.png'],
+]
+
+const BRACKET_VIEWBOX_WIDTH = 1120
+const BRACKET_VIEWBOX_HEIGHT = 820
+const BRACKET_ROWS = [64, 163, 262, 361, 460, 559, 658, 757]
+const BRACKET_LEFT_COLUMNS = [190, 315, 420, 505, 560]
+const BRACKET_FLAG_SIZE = 38
+const BRACKET_FLAG_GAP = 9
+const BRACKET_FLAG_OFFSET = (BRACKET_FLAG_SIZE + BRACKET_FLAG_GAP) / 2
+const BRACKET_SIDE_CONFIG = {
+  left: {
+    flagX: 62,
+    columns: BRACKET_LEFT_COLUMNS,
+    flagPairs: LEFT_BRACKET_FLAGS,
+  },
+  right: {
+    flagX: BRACKET_VIEWBOX_WIDTH - 62,
+    columns: BRACKET_LEFT_COLUMNS.map((column) => BRACKET_VIEWBOX_WIDTH - column),
+    flagPairs: RIGHT_BRACKET_FLAGS,
+  },
+}
+
+function pairCenters(values: number[]) {
+  const centers: number[] = []
+  for (let i = 0; i < values.length; i += 2) {
+    centers.push((values[i] + values[i + 1]) / 2)
   }
-  return arr
+  return centers
+}
+
+function TournamentBracketSvg() {
+  const round16 = pairCenters(BRACKET_ROWS)
+  const quarterFinal = pairCenters(round16)
+  const semiFinal = pairCenters(quarterFinal)
+  const rounds = [BRACKET_ROWS, round16, quarterFinal, semiFinal]
+
+  return (
+    <svg
+      className="hero-bracket-svg"
+      viewBox={`0 0 ${BRACKET_VIEWBOX_WIDTH} ${BRACKET_VIEWBOX_HEIGHT}`}
+      preserveAspectRatio="xMidYMid meet"
+      aria-hidden="true"
+    >
+      <defs>
+        {(['left', 'right'] as const).flatMap((side) =>
+          BRACKET_SIDE_CONFIG[side].flagPairs.flatMap((pair, matchIndex) => {
+            const centerY = BRACKET_ROWS[matchIndex]
+            const flagCenters = [centerY - BRACKET_FLAG_OFFSET, centerY + BRACKET_FLAG_OFFSET]
+
+            return pair.map((_, flagIndex) => (
+              <clipPath key={`${side}-${matchIndex}-${flagIndex}`} id={`hero-flag-clip-${side}-${matchIndex}-${flagIndex}`}>
+                <circle
+                  cx={BRACKET_SIDE_CONFIG[side].flagX}
+                  cy={flagCenters[flagIndex]}
+                  r={BRACKET_FLAG_SIZE / 2}
+                />
+              </clipPath>
+            ))
+          })
+        )}
+      </defs>
+      {renderBracketSide('left', rounds)}
+      {renderBracketSide('right', rounds)}
+      <line
+        className="hero-bracket-line final"
+        x1={BRACKET_LEFT_COLUMNS[3]}
+        y1={semiFinal[0]}
+        x2={BRACKET_VIEWBOX_WIDTH - BRACKET_LEFT_COLUMNS[3]}
+        y2={semiFinal[0]}
+      />
+    </svg>
+  )
+}
+
+function renderBracketSide(side: 'left' | 'right', rounds: number[][]) {
+  const { columns, flagPairs, flagX } = BRACKET_SIDE_CONFIG[side]
+  const isLeft = side === 'left'
+  const flagEdgeX = flagX + (isLeft ? BRACKET_FLAG_SIZE / 2 : -BRACKET_FLAG_SIZE / 2)
+  const firstColumnX = columns[0]
+
+  return (
+    <g key={side}>
+      {flagPairs.map((pair, matchIndex) => {
+        const centerY = BRACKET_ROWS[matchIndex]
+        const flagCenters = [centerY - BRACKET_FLAG_OFFSET, centerY + BRACKET_FLAG_OFFSET]
+
+        return (
+          <g key={`${side}-match-${matchIndex}`}>
+            {flagCenters.map((flagY, flagIndex) => (
+              <g key={`${side}-flag-${matchIndex}-${flagIndex}`}>
+                <line className="hero-bracket-line" x1={flagEdgeX} y1={flagY} x2={firstColumnX} y2={flagY} />
+                <image
+                  href={pair[flagIndex]}
+                  x={flagX - BRACKET_FLAG_SIZE / 2}
+                  y={flagY - BRACKET_FLAG_SIZE / 2}
+                  width={BRACKET_FLAG_SIZE}
+                  height={BRACKET_FLAG_SIZE}
+                  preserveAspectRatio="xMidYMid slice"
+                  clipPath={`url(#hero-flag-clip-${side}-${matchIndex}-${flagIndex})`}
+                />
+                <circle className="hero-bracket-flag-ring" cx={flagX} cy={flagY} r={BRACKET_FLAG_SIZE / 2} />
+              </g>
+            ))}
+            <line
+              className="hero-bracket-line"
+              x1={firstColumnX}
+              y1={flagCenters[0]}
+              x2={firstColumnX}
+              y2={flagCenters[1]}
+            />
+            <circle className="hero-bracket-node" cx={firstColumnX} cy={centerY} r="7" />
+          </g>
+        )
+      })}
+      {rounds.slice(0, -1).map((round, roundIndex) =>
+        round.map((startY, index) => {
+          const sourceX = columns[roundIndex]
+          const targetX = columns[roundIndex + 1]
+
+          return (
+            <g key={`${side}-round-${roundIndex}-${index}`}>
+              <line className="hero-bracket-line" x1={sourceX} y1={startY} x2={targetX} y2={startY} />
+              {index % 2 === 0 && (
+                <>
+                  <line className="hero-bracket-line" x1={targetX} y1={startY} x2={targetX} y2={round[index + 1]} />
+                  <circle className="hero-bracket-node" cx={targetX} cy={(startY + round[index + 1]) / 2} r="5.5" />
+                </>
+              )}
+            </g>
+          )
+        })
+      )}
+    </g>
+  )
 }
 
 export function Hero({ onNavigate }: HeroProps) {
@@ -40,8 +172,6 @@ export function Hero({ onNavigate }: HeroProps) {
     setButtonClicked(true)
     onNavigate('why-us')
   }
-
-  const shuffledFlags = shuffleArray(FLAGS)
 
   return (
     <section className="hero">
@@ -66,22 +196,11 @@ export function Hero({ onNavigate }: HeroProps) {
         alt="FIFA World Cup 2026"
         draggable={false}
       />
-      <div className="hero-perimeter-flags">
-        {shuffledFlags.map((flag, i) => (
-          <img
-            key={`f-${i}`}
-            className="hero-perimeter-flag"
-            src={flag}
-            alt=""
-            draggable={false}
-          />
-        ))}
+      <div className="hero-tournament-bracket" aria-hidden="true">
+        <TournamentBracketSvg />
       </div>
       <div className="container">
         <div className="hero-content">
-          <div className="hero-badge">
-            <span className="badge-text">{messages.hero.badge}</span>
-          </div>
           <h1 className="hero-title">
             {messages.hero.title}
             <br />
@@ -90,28 +209,6 @@ export function Hero({ onNavigate }: HeroProps) {
           <p className="hero-description">
             {messages.hero.description}
           </p>
-
-          <div className="hero-visuals">
-            <div className="hero-bracket">
-              <div className="bracket-track">
-                <div className="bracket-progress"></div>
-                <div className="bracket-stages">
-                  {[
-                    { label: 'Группы', step: '1' },
-                    { label: '1/8', step: '2' },
-                    { label: '1/4', step: '3' },
-                    { label: '1/2', step: '4' },
-                    { label: 'Финал', isFinal: true, icon: '🏆' },
-                  ].map((stage, i) => (
-                    <div key={i} className={`bracket-stage ${stage.isFinal ? 'final' : ''}`}>
-                      <div className="bracket-node">{stage.icon ?? stage.step}</div>
-                      <span className="bracket-label">{stage.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
 
           <div className="hero-cta">
             <a

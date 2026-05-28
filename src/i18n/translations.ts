@@ -17,6 +17,7 @@ export interface Messages {
     title: string
     highlightedTitle: string
     description: string
+    bracketRounds: [string, string, string, string, string]
     ctaPrimary: string
     ctaSecondary: string
   }
@@ -79,7 +80,10 @@ export interface Messages {
     cta: string
     scheduleTitle: string
     scheduleSubtitle: string
+    scheduleRulesTitle: string
+    scheduleRules: [string, string, string]
     scheduleFinalBadge: string
+    scheduleGuaranteeStamp: string
     schedulePrizesNote: string
     scheduleHeader: [string, string, string, string]
     scheduleRows: Array<{
@@ -110,6 +114,7 @@ export const translations: Record<Locale, Messages> = {
       title: 'Прогнозируй на ЧМ 2026 —',
       highlightedTitle: 'выигрывай призы',
       description: 'Соревнуйся с другими участниками в турнирах по прогнозам. Без огромных рисков — только твои знания футбола.',
+      bracketRounds: ['1/16', '1/8', '1/4', '1/2', 'Финал'],
       ctaPrimary: 'Зарегистрироваться',
       ctaSecondary: 'Узнать больше',
     },
@@ -202,13 +207,20 @@ export const translations: Record<Locale, Messages> = {
       cta: 'Как это работает',
       scheduleTitle: 'Расписание турниров',
       scheduleSubtitle: 'Три этапа — от группового до финала',
+      scheduleRulesTitle: 'У каждого турнира свои правила',
+      scheduleRules: [
+        'Количество прогнозов на турнир задаётся отдельно',
+        'Лимиты прогнозов на матч зависят от этапа',
+        'Формат бесплатных и платных турниров может отличаться',
+      ],
       scheduleFinalBadge: '🏆 ФИНАЛ',
+      scheduleGuaranteeStamp: '✓ Гарантировано',
       schedulePrizesNote: '🎟️ Среди призов — гарантированные выплаты и билеты на финал ЧМ',
       scheduleHeader: ['Этап', 'Даты', 'Взнос', 'Призовой фонд'],
       scheduleRows: [
-        { num: '1', name: 'Групповой этап', dates: 'Скоро', fee: 'Бесплатно', prize: '$500 гарантировано', isFinal: false },
-        { num: '2', name: '1/16 финала', dates: '3 – 6 июля 2026', fee: 'Бесплатно', prize: '$500 гарантировано', isFinal: false },
-        { num: '3', name: 'Финальная стадия (1/8 – Финал)', dates: '7 – 19 июля 2026', fee: '$10', prize: '$20 000+ гарантировано', isFinal: true },
+        { num: '1', name: 'Групповой этап', dates: 'Скоро', fee: 'Бесплатно', prize: '$500', isFinal: false },
+        { num: '2', name: '1/16 финала', dates: '3 – 6 июля 2026', fee: 'Бесплатно', prize: '$500', isFinal: false },
+        { num: '3', name: 'Финальная стадия (1/8 – Финал)', dates: '7 – 19 июля 2026', fee: '$10', prize: '$20 000+', isFinal: true },
       ],
     },
     footer: {
@@ -228,6 +240,7 @@ export const translations: Record<Locale, Messages> = {
       title: 'Predict on World Cup 2026 —',
       highlightedTitle: 'win prizes',
       description: 'Compete with others in prediction tournaments. Without huge risks — just your football knowledge.',
+      bracketRounds: ['R32', 'R16', 'QF', 'SF', 'Final'],
       ctaPrimary: 'Sign up',
       ctaSecondary: 'Learn more',
     },
@@ -320,13 +333,20 @@ export const translations: Record<Locale, Messages> = {
       cta: 'How it works',
       scheduleTitle: 'Tournament Schedule',
       scheduleSubtitle: 'Three stages — from group stage to final',
+      scheduleRulesTitle: 'Every tournament has its own rules',
+      scheduleRules: [
+        'Prediction limits per tournament are configured separately',
+        'Prediction limits per match depend on the stage',
+        'Free and paid tournaments can use different formats',
+      ],
       scheduleFinalBadge: '🏆 FINAL',
+      scheduleGuaranteeStamp: '✓ Guaranteed',
       schedulePrizesNote: '🎟️ Among prizes — guaranteed payouts and World Cup final tickets',
       scheduleHeader: ['Stage', 'Dates', 'Entry Fee', 'Prize Pool'],
       scheduleRows: [
-        { num: '1', name: 'Group Stage', dates: 'Coming soon', fee: 'Free', prize: '$500 guaranteed', isFinal: false },
-        { num: '2', name: 'Round of 32', dates: 'Jul 3 – 6, 2026', fee: 'Free', prize: '$500 guaranteed', isFinal: false },
-        { num: '3', name: 'Final Stage (R16 – Final)', dates: 'Jul 7 – 19, 2026', fee: '$10', prize: '$20,000+ guaranteed', isFinal: true },
+        { num: '1', name: 'Group Stage', dates: 'Coming soon', fee: 'Free', prize: '$500', isFinal: false },
+        { num: '2', name: 'Round of 32', dates: 'Jul 3 – 6, 2026', fee: 'Free', prize: '$500', isFinal: false },
+        { num: '3', name: 'Final Stage (R16 – Final)', dates: 'Jul 7 – 19, 2026', fee: '$10', prize: '$20,000+', isFinal: true },
       ],
     },
     footer: {
