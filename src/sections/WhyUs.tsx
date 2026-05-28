@@ -13,6 +13,10 @@ interface WhyUsProps {
 
 const SCHEDULE_RULE_ICONS = [ListChecks, Gauge, SlidersHorizontal]
 
+function stripLeadingMarker(value: string) {
+  return value.replace(/^[^\p{L}\p{N}$]+/u, '').trim()
+}
+
 export function WhyUs({ sectionRef, isVisible = {}, onNavigate }: WhyUsProps) {
   const { messages } = useI18n()
 
@@ -100,15 +104,10 @@ export function WhyUs({ sectionRef, isVisible = {}, onNavigate }: WhyUsProps) {
         <div className={`tournament-schedule ${isVisible['why-us'] ? 'fade-in-up delay-300' : ''}`}>
           <div className="schedule-header">
             <h3 className="schedule-title">{messages.whyUs.scheduleTitle}</h3>
-            <p className="schedule-subtitle">{messages.whyUs.scheduleSubtitle}</p>
           </div>
           <div className="schedule-rules">
             <div className="schedule-rules-header">
               <div className="schedule-rules-title">{messages.whyUs.scheduleRulesTitle}</div>
-              <div className="schedule-rules-status">
-                <span />
-                {messages.whyUs.scheduleRows.length}
-              </div>
             </div>
             <div className="schedule-rules-list">
               {messages.whyUs.scheduleRules.map((rule, index) => (
@@ -130,14 +129,14 @@ export function WhyUs({ sectionRef, isVisible = {}, onNavigate }: WhyUsProps) {
           <div className="schedule-cards">
             {messages.whyUs.scheduleRows.map((row) => (
               <div key={row.num} className={`schedule-card ${row.isFinal ? 'final' : ''}`}>
+                {row.isFinal && <span className="final-badge">{stripLeadingMarker(messages.whyUs.scheduleFinalBadge)}</span>}
                 <div className="schedule-card-top">
                   <span className="schedule-card-num">{row.num}</span>
                   <div className="schedule-card-title-block">
                     <span className="schedule-card-name">{row.name}</span>
-                    {row.isFinal && <span className="final-badge">{messages.whyUs.scheduleFinalBadge}</span>}
                   </div>
                 </div>
-                <div className="schedule-card-dates">📅 {row.dates}</div>
+                <div className="schedule-card-dates">{row.dates}</div>
                 <div className="schedule-card-footer">
                   <div className="schedule-card-fee">
                     <span className="fee-label">{messages.whyUs.scheduleHeader[2]}</span>
@@ -146,13 +145,13 @@ export function WhyUs({ sectionRef, isVisible = {}, onNavigate }: WhyUsProps) {
                   <div className="schedule-card-prize">
                     <span className="prize-label">{messages.whyUs.scheduleHeader[3]}</span>
                     <span className="prize-value">{row.prize}</span>
-                    <span className="guaranteed-stamp">{messages.whyUs.scheduleGuaranteeStamp}</span>
+                    <span className="guaranteed-stamp">{stripLeadingMarker(messages.whyUs.scheduleGuaranteeStamp)}</span>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          <p className="schedule-prizes-note">{messages.whyUs.schedulePrizesNote}</p>
+          <p className="schedule-prizes-note">{stripLeadingMarker(messages.whyUs.schedulePrizesNote)}</p>
         </div>
 
         <div className={`why-us-cta ${isVisible['why-us'] ? 'fade-in-up delay-400' : ''}`}>

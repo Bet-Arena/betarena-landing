@@ -20,9 +20,13 @@ export function useScrollToSection(sectionsRef: RefObject<Record<string, HTMLDiv
       }
 
       if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+        const rootStyles = window.getComputedStyle(document.documentElement)
+        const offset = Number.parseFloat(rootStyles.getPropertyValue('--section-scroll-offset')) || 0
+        const top = window.scrollY + element.getBoundingClientRect().top - offset
+
+        window.scrollTo({
+          top: Math.max(0, top),
+          behavior: 'smooth'
         })
       }
     }, 100)

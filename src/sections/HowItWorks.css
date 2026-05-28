@@ -323,7 +323,6 @@
 @media (max-width: 768px) {
   .detailed-steps {
     padding: var(--spacing-section-features);
-    padding-bottom: 80px;
   }
 
   .step-navigation {
@@ -384,4 +383,3 @@
   }
 
 }
-
