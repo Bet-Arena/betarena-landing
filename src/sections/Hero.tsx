@@ -30,6 +30,27 @@ const RIGHT_BRACKET_FLAGS = [
   ['/flags/mx.png', '/flags/au.png'],
 ]
 
+const MOBILE_HERO_FLAGS = [
+  '/flags/us.png',
+  '/flags/ca.png',
+  '/flags/mx.png',
+  '/flags/br.png',
+  '/flags/ar.png',
+  '/flags/de.png',
+  '/flags/fr.png',
+  '/flags/es.png',
+  '/flags/it.png',
+  '/flags/nl.png',
+  '/flags/pt.png',
+  '/flags/gb.png',
+  '/flags/be.png',
+  '/flags/hr.png',
+  '/flags/ma.png',
+  '/flags/jp.png',
+  '/flags/kr.png',
+  '/flags/au.png',
+]
+
 const BRACKET_VIEWBOX_WIDTH = 1120
 const BRACKET_VIEWBOX_HEIGHT = 820
 const BRACKET_ROWS = [64, 163, 262, 361, 460, 559, 658, 757]
@@ -132,13 +153,12 @@ function renderBracketSide(side: 'left' | 'right', rounds: number[][]) {
               </g>
             ))}
             <line
-              className="hero-bracket-line"
+              className="hero-bracket-line hero-bracket-line--knockout"
               x1={firstColumnX}
               y1={flagCenters[0]}
               x2={firstColumnX}
               y2={flagCenters[1]}
             />
-            <circle className="hero-bracket-node" cx={firstColumnX} cy={centerY} r="7" />
           </g>
         )
       })}
@@ -149,11 +169,10 @@ function renderBracketSide(side: 'left' | 'right', rounds: number[][]) {
 
           return (
             <g key={`${side}-round-${roundIndex}-${index}`}>
-              <line className="hero-bracket-line" x1={sourceX} y1={startY} x2={targetX} y2={startY} />
+              <line className="hero-bracket-line hero-bracket-line--knockout" x1={sourceX} y1={startY} x2={targetX} y2={startY} />
               {index % 2 === 0 && (
                 <>
-                  <line className="hero-bracket-line" x1={targetX} y1={startY} x2={targetX} y2={round[index + 1]} />
-                  <circle className="hero-bracket-node" cx={targetX} cy={(startY + round[index + 1]) / 2} r="5.5" />
+                  <line className="hero-bracket-line hero-bracket-line--knockout" x1={targetX} y1={startY} x2={targetX} y2={round[index + 1]} />
                 </>
               )}
             </g>
@@ -167,6 +186,9 @@ function renderBracketSide(side: 'left' | 'right', rounds: number[][]) {
 export function Hero({ onNavigate }: HeroProps) {
   const [buttonClicked, setButtonClicked] = useState(false)
   const { messages } = useI18n()
+  const heroTitleMatch = messages.hero.title.match(/^(.*?)(\s+[—-])$/)
+  const heroTitleText = heroTitleMatch?.[1] ?? messages.hero.title
+  const heroTitleDash = heroTitleMatch?.[2] ?? ''
 
   const handleLearnMore = () => {
     setButtonClicked(true)
@@ -202,13 +224,25 @@ export function Hero({ onNavigate }: HeroProps) {
       <div className="container">
         <div className="hero-content">
           <h1 className="hero-title">
-            {messages.hero.title}
+            {heroTitleText}
+            {heroTitleDash && <span className="hero-title-mobile-dash">{heroTitleDash}</span>}
             <br />
             <span className="gradient-text">{messages.hero.highlightedTitle}</span>
           </h1>
           <p className="hero-description">
             {messages.hero.description}
           </p>
+
+          <div className="hero-mobile-flags-container" aria-hidden="true">
+            <div className="hero-mobile-flags">
+              {MOBILE_HERO_FLAGS.map((flagSrc, index) => (
+                <img key={`a-${flagSrc}-${index}`} className="hero-mobile-flag" src={flagSrc} alt="" draggable={false} />
+              ))}
+              {MOBILE_HERO_FLAGS.map((flagSrc, index) => (
+                <img key={`b-${flagSrc}-${index}`} className="hero-mobile-flag" src={flagSrc} alt="" draggable={false} />
+              ))}
+            </div>
+          </div>
 
           <div className="hero-cta">
             <a
