@@ -7,8 +7,16 @@
   z-index: 10;
 }
 
+.tournament-schedule-section {
+  background: transparent;
+  padding: var(--spacing-section-features);
+  position: relative;
+  overflow: visible;
+  z-index: 10;
+}
+
 .comparison-showcase {
-  margin-bottom: 60px;
+  margin-bottom: 0;
   opacity: 1;
   transform: translateY(0);
   position: relative;
@@ -217,7 +225,7 @@
 
 /* Tournament Schedule */
 .tournament-schedule {
-  margin-top: 60px;
+  margin-top: 0;
   margin-bottom: 40px;
   position: relative;
   z-index: 20;
@@ -225,15 +233,10 @@
 
 .schedule-header {
   text-align: center;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
 
 .schedule-title {
-  font-family: 'Inter', sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 1.3em;
-  color: var(--text-primary);
   margin-bottom: 0;
 }
 
@@ -283,16 +286,7 @@
 }
 
 .schedule-rule-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: rgba(40, 194, 255, 0.1);
-  border: 1px solid rgba(40, 194, 255, 0.22);
-  color: var(--theme-primary);
-  flex-shrink: 0;
+  display: none;
 }
 
 .schedule-rule-copy {
@@ -502,7 +496,7 @@
 /* Why Us CTA */
 .why-us-cta {
   text-align: center;
-  margin-top: 60px;
+  margin-top: 32px;
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
@@ -591,7 +585,7 @@
   }
 
   .why-us-cta {
-    margin-top: 40px;
+    margin-top: 24px;
   }
 
   .why-us-cta .btn-primary {
@@ -599,45 +593,222 @@
   }
 
   .tournament-schedule {
-    margin-top: 40px;
+    margin-top: 0;
     margin-bottom: 32px;
   }
 
-  .schedule-title {
-    font-size: 22px;
-  }
-
-  .schedule-cards {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .schedule-rules {
-    gap: 12px;
+  .schedule-header {
     margin-bottom: 18px;
   }
 
+  .schedule-rules {
+    align-items: stretch;
+    gap: 12px;
+    max-width: 420px;
+    margin: 0 auto 24px;
+    padding: 14px;
+    border: 1px solid rgba(51, 65, 85, 0.58);
+    border-radius: 12px;
+    background: rgba(15, 23, 42, 0.46);
+  }
+
   .schedule-rules-header {
-    text-align: center;
+    text-align: left;
+  }
+
+  .schedule-rules-title {
+    font-size: 13px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text-primary);
   }
 
   .schedule-rules-list {
-    justify-content: stretch;
-    gap: 8px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .schedule-rule {
     width: 100%;
     justify-content: flex-start;
-    border-radius: 12px;
+    min-height: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    gap: 10px;
+    font-size: 12px;
+    line-height: 1.35;
+    color: var(--text-secondary);
+  }
+
+  .schedule-rule-copy {
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .schedule-rule-index {
+    padding-top: 2px;
+    font-size: 10px;
+  }
+
+  .schedule-cards {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .schedule-cards::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    bottom: 22px;
+    left: 17px;
+    z-index: 0;
+    width: 1px;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 217, 255, 0.45),
+      rgba(0, 217, 255, 0.18) 55%,
+      rgba(251, 191, 36, 0.45)
+    );
   }
 
   .schedule-card {
-    padding: 20px;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 0 10px;
+    padding: 0 0 22px;
+    min-height: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+    box-shadow: none;
+  }
+
+  .schedule-card:not(:last-child)::before {
+    display: none;
+  }
+
+  .schedule-card:hover,
+  .schedule-card.final:hover {
+    border-color: transparent;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .schedule-card.final {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .schedule-card:last-child {
+    padding-bottom: 0;
+  }
+
+  .schedule-card-top {
+    display: contents;
+    min-height: 0;
+    padding-right: 0;
+  }
+
+  .schedule-card-num {
+    position: relative;
+    z-index: 2;
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    width: 34px;
+    height: 34px;
+    margin: 0;
+    border-radius: 10px;
+    background: #020617;
+  }
+
+  .schedule-card-title-block {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    padding-top: 1px;
+  }
+
+  .schedule-card-name {
+    font-size: 15px;
+    line-height: 1.25;
+  }
+
+  .schedule-card-dates {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 4px 0 0;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .final-badge {
+    position: static;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    align-self: start;
+    margin-top: 1px;
+  }
+
+  .schedule-card.final .schedule-card-title-block {
+    padding-right: 58px;
   }
 
   .schedule-card-footer {
-    flex-direction: row;
-    gap: 16px;
+    grid-column: 2;
+    grid-row: 3;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 7px;
+    margin-top: 10px;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .schedule-card-fee,
+  .schedule-card-prize {
+    display: grid;
+    grid-template-columns: 78px minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 8px;
+    padding: 8px 10px;
+    border: 1px solid rgba(51, 65, 85, 0.56);
+    border-radius: 8px;
+    background: rgba(15, 23, 42, 0.38);
+  }
+
+  .fee-label,
+  .prize-label {
+    font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .fee-value,
+  .prize-value {
+    font-size: 13px;
+    line-height: 1.2;
+  }
+
+  .guaranteed-stamp {
+    grid-column: 3;
+    margin-top: 0;
+    white-space: nowrap;
+  }
+
+  .schedule-prizes-note {
+    margin-top: 18px;
+    font-size: 13px;
+    line-height: 1.4;
   }
 }

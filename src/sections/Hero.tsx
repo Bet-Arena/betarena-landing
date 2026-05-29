@@ -79,7 +79,7 @@ function pairCenters(values: number[]) {
   return centers
 }
 
-function TournamentBracketSvg() {
+function TournamentBracketSvg({ clipIdPrefix = 'hero' }: { clipIdPrefix?: string }) {
   const round16 = pairCenters(BRACKET_ROWS)
   const quarterFinal = pairCenters(round16)
   const semiFinal = pairCenters(quarterFinal)
@@ -99,7 +99,7 @@ function TournamentBracketSvg() {
             const flagCenters = [centerY - BRACKET_FLAG_OFFSET, centerY + BRACKET_FLAG_OFFSET]
 
             return pair.map((_, flagIndex) => (
-              <clipPath key={`${side}-${matchIndex}-${flagIndex}`} id={`hero-flag-clip-${side}-${matchIndex}-${flagIndex}`}>
+              <clipPath key={`${side}-${matchIndex}-${flagIndex}`} id={`${clipIdPrefix}-flag-clip-${side}-${matchIndex}-${flagIndex}`}>
                 <circle
                   cx={BRACKET_SIDE_CONFIG[side].flagX}
                   cy={flagCenters[flagIndex]}
@@ -110,8 +110,8 @@ function TournamentBracketSvg() {
           })
         )}
       </defs>
-      {renderBracketSide('left', rounds)}
-      {renderBracketSide('right', rounds)}
+      {renderBracketSide('left', rounds, clipIdPrefix)}
+      {renderBracketSide('right', rounds, clipIdPrefix)}
       <line
         className="hero-bracket-line final"
         x1={BRACKET_LEFT_COLUMNS[3]}
@@ -123,7 +123,7 @@ function TournamentBracketSvg() {
   )
 }
 
-function renderBracketSide(side: 'left' | 'right', rounds: number[][]) {
+function renderBracketSide(side: 'left' | 'right', rounds: number[][], clipIdPrefix: string) {
   const { columns, flagPairs, flagX } = BRACKET_SIDE_CONFIG[side]
   const isLeft = side === 'left'
   const flagEdgeX = flagX + (isLeft ? BRACKET_FLAG_SIZE / 2 : -BRACKET_FLAG_SIZE / 2)
@@ -147,7 +147,7 @@ function renderBracketSide(side: 'left' | 'right', rounds: number[][]) {
                   width={BRACKET_FLAG_SIZE}
                   height={BRACKET_FLAG_SIZE}
                   preserveAspectRatio="xMidYMid slice"
-                  clipPath={`url(#hero-flag-clip-${side}-${matchIndex}-${flagIndex})`}
+                  clipPath={`url(#${clipIdPrefix}-flag-clip-${side}-${matchIndex}-${flagIndex})`}
                 />
                 <circle className="hero-bracket-flag-ring" cx={flagX} cy={flagY} r={BRACKET_FLAG_SIZE / 2} />
               </g>
@@ -232,6 +232,17 @@ export function Hero({ onNavigate }: HeroProps) {
           <p className="hero-description">
             {messages.hero.description}
           </p>
+          <div className="hero-mobile-trophy-stage" aria-hidden="true">
+            <div className="hero-mobile-tournament-bracket">
+              <TournamentBracketSvg clipIdPrefix="hero-mobile" />
+            </div>
+            <img
+              className="hero-mobile-trophy"
+              src="/pngtree-the-fifa-world-cup-trophy-png-image_19941957-removebg-preview-Photoroom.png"
+              alt=""
+              draggable={false}
+            />
+          </div>
 
           <div className="hero-mobile-flags-container" aria-hidden="true">
             <div className="hero-mobile-flags">
