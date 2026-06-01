@@ -7,9 +7,12 @@ interface Step2Props {
   onBetConfirm: () => void
 }
 
+const DEFAULT_OUTCOME = 'win1'
+const DEFAULT_COEFFICIENT = '2.05'
+
 export function Step2({ isActive, onBetConfirm }: Step2Props) {
-  const [selectedOutcome, setSelectedOutcome] = useState<string | null>(null)
-  const [selectedCoefficient, setSelectedCoefficient] = useState<string | null>(null)
+  const [selectedOutcome, setSelectedOutcome] = useState<string | null>(DEFAULT_OUTCOME)
+  const [selectedCoefficient, setSelectedCoefficient] = useState<string | null>(DEFAULT_COEFFICIENT)
   const [confirmClicked, setConfirmClicked] = useState(false)
   const { messages } = useI18n()
   const step = messages.steps.step2
