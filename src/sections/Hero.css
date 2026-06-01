@@ -1,12 +1,22 @@
 /* Hero Section */
 .hero {
   position: relative;
-  padding: 128px 0 96px;
-  overflow: visible;
+  padding: 150px 0 96px;
+  overflow: hidden;
+  overflow: clip;
   min-height: 90vh;
   display: flex;
   align-items: center;
   background: transparent;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 28%, rgba(2, 6, 23, 0.4) 0%, transparent 55%);
+  z-index: 10;
+  pointer-events: none;
 }
 
 .hero-content {
@@ -15,22 +25,6 @@
   text-align: center;
   max-width: 900px;
   margin: 0 auto;
-}
-
-.hero-badge {
-  display: inline-block;
-  padding: 8px 16px;
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid #334155;
-  border-radius: 20px;
-  margin-bottom: 24px;
-  backdrop-filter: blur(10px);
-}
-
-.badge-text {
-  font-size: 14px;
-  color: var(--theme-primary);
-  font-weight: 500;
 }
 
 .hero-title {
@@ -62,6 +56,14 @@
   margin-right: auto;
 }
 
+.hero-mobile-flags-container {
+  display: none;
+}
+
+.hero-mobile-trophy-stage {
+  display: none;
+}
+
 .hero-cta {
   display: flex;
   gap: 16px;
@@ -70,17 +72,178 @@
   flex-wrap: wrap;
 }
 
-/* Pulsing animation for "Узнать больше" button in Hero */
+/* Pulsing animation for CTA buttons in Hero */
 .hero-cta .btn-primary {
   animation: pulseSoft 2s ease-in-out infinite;
+}
+
+.hero-cta .btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.hero-cta .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-color-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.hero-trophy {
+  position: absolute;
+  top: 380px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+  opacity: 0.34;
+  filter: drop-shadow(0 0 24px rgba(251, 191, 36, 0.35));
+  animation: trophyFloat 3s ease-in-out infinite;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes trophyFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Tournament Bracket Background */
+.hero-tournament-bracket {
+  position: absolute;
+  top: 164px;
+  left: 50%;
+  width: min(1120px, calc(100vw - 32px));
+  height: 820px;
+  transform: translateX(-50%);
+  z-index: 2;
+  opacity: 0.72;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  mask-image:
+    radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.18) 18%, rgba(0, 0, 0, 0.72) 42%, #000 70%),
+    linear-gradient(to bottom, transparent 0%, #000 10%, #000 88%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.18) 18%, rgba(0, 0, 0, 0.72) 42%, #000 70%),
+    linear-gradient(to bottom, transparent 0%, #000 10%, #000 88%, transparent 100%);
+  -webkit-mask-composite: source-in;
+}
+
+.hero-tournament-bracket::before {
+  content: '';
+  position: absolute;
+  inset: 18% 28%;
+  background: radial-gradient(circle at 50% 54%, rgba(251, 191, 36, 0.12), transparent 52%);
+  opacity: 0.7;
+}
+
+.hero-bracket-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.hero-bracket-line {
+  stroke: rgba(255, 255, 255, 0.34);
+  stroke-width: 1.8;
+  vector-effect: non-scaling-stroke;
+}
+
+.hero-bracket-line--knockout {
+  stroke: rgba(255, 255, 255, 0.18);
+}
+
+.hero-bracket-line.final {
+  stroke: rgba(251, 191, 36, 0.14);
+}
+
+.hero-bracket-flag-ring {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.72);
+  stroke-width: 2;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.32));
+}
+
+@media (min-width: 769px) and (max-height: 860px) {
+  .hero {
+    padding: 118px 0 72px;
+    min-height: 820px;
+  }
+
+  .hero-title {
+    font-size: 54px;
+  }
+
+  .hero-description {
+    font-size: 18px;
+    margin-bottom: 28px;
+  }
+
+  .hero-cta {
+    margin-bottom: 42px;
+  }
+
+  .hero-trophy {
+    top: 330px;
+    width: 350px;
+    height: 350px;
+  }
+
+  .hero-tournament-bracket {
+    top: 122px;
+    height: 680px;
+  }
+}
+
+@media (min-width: 769px) and (max-height: 760px) {
+  .hero {
+    padding-top: 104px;
+    min-height: 760px;
+  }
+
+  .hero-title {
+    font-size: 48px;
+  }
+
+  .hero-description {
+    font-size: 17px;
+    margin-bottom: 24px;
+  }
+
+  .hero-cta {
+    margin-bottom: 32px;
+  }
+
+  .hero-trophy {
+    top: 300px;
+    width: 320px;
+    height: 320px;
+    opacity: 0.3;
+  }
+
+  .hero-tournament-bracket {
+    top: 96px;
+    height: 640px;
+    opacity: 0.58;
+  }
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .hero {
-    padding: 88px 0 0;
+    padding: 108px 0 32px;
+    min-height: 100svh;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
@@ -88,7 +251,7 @@
   .hero .container {
     width: 100%;
     padding: 0 var(--spacing-container);
-    height: 100%;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -97,27 +260,133 @@
   .hero-content {
     max-width: 100%;
     width: 100%;
-    padding: 40px 0;
-  }
-
-  .hero-badge {
-    padding: 6px 12px;
-    margin-bottom: 20px;
-  }
-
-  .badge-text {
-    font-size: 12px;
+    padding: 0;
   }
 
   .hero-title {
     font-size: 32px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     line-height: 1.2;
+  }
+
+  .hero-title-mobile-dash {
+    display: none;
+  }
+
+  .hero-mobile-trophy-stage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(100vw, 430px);
+    aspect-ratio: 1120 / 820;
+    margin: 0 auto 20px;
+  }
+
+  .hero-mobile-tournament-bracket {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    opacity: 0.58;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    mask-image:
+      radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.56) 16%, #000 72%, rgba(0, 0, 0, 0.88) 88%, transparent 100%),
+      linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%);
+    mask-composite: intersect;
+    -webkit-mask-image:
+      radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.56) 16%, #000 72%, rgba(0, 0, 0, 0.88) 88%, transparent 100%),
+      linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%);
+    -webkit-mask-composite: source-in;
+  }
+
+  .hero-mobile-tournament-bracket::before {
+    content: '';
+    position: absolute;
+    inset: 18% 30%;
+    background: radial-gradient(circle at 50% 54%, rgba(251, 191, 36, 0.16), transparent 58%);
+  }
+
+  .hero-mobile-tournament-bracket .hero-bracket-line {
+    stroke-width: 1.15;
+  }
+
+  .hero-mobile-tournament-bracket .hero-bracket-line--knockout {
+    stroke: rgba(255, 255, 255, 0.24);
+  }
+
+  .hero-mobile-tournament-bracket .hero-bracket-flag-ring {
+    stroke-width: 1.4;
+  }
+
+  .hero-mobile-trophy {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 212px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.42));
+    animation: trophyFloat 3s ease-in-out infinite;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
   }
 
   .hero-description {
     font-size: 16px;
-    margin-bottom: 32px;
+    margin-bottom: 18px;
+  }
+
+  .hero-mobile-flags-container {
+    display: none;
+  }
+
+  .hero-mobile-flags-container::before,
+  .hero-mobile-flags-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    width: 42px;
+    pointer-events: none;
+  }
+
+  .hero-mobile-flags-container::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(15, 23, 42, 0.88), transparent);
+  }
+
+  .hero-mobile-flags-container::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(15, 23, 42, 0.88), transparent);
+  }
+
+  .hero-mobile-flags {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: max-content;
+    animation: heroMobileFlagsScroll 24s linear infinite;
+  }
+
+  .hero-mobile-flag {
+    flex-shrink: 0;
+    display: block;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.62);
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.34));
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   .hero-cta {
@@ -126,8 +395,247 @@
     flex-direction: column;
   }
 
-  .hero-cta .btn-primary {
+  .hero-cta .btn-primary,
+  .hero-cta .btn-secondary {
     width: 100%;
     max-width: 100%;
+  }
+
+  .hero-trophy {
+    display: none;
+  }
+
+  .hero-tournament-bracket {
+    display: none;
+  }
+
+  .hero-tournament-bracket::before {
+    inset: 18% 20%;
+  }
+
+  .hero-bracket-line {
+    stroke-width: 1.2;
+  }
+
+  .hero::before {
+    background: radial-gradient(circle at 50% 35%, rgba(2, 6, 23, 0.4) 0%, transparent 55%);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: 96px;
+  }
+
+  .hero-content {
+    padding: 0;
+  }
+
+  .hero-title {
+    font-size: 30px;
+  }
+
+  .hero-mobile-trophy-stage {
+    width: min(100vw, 390px);
+    margin-bottom: 18px;
+  }
+
+  .hero-mobile-tournament-bracket {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-mobile-trophy {
+    width: 196px;
+  }
+
+  .hero-description {
+    font-size: 15px;
+    line-height: 1.45;
+    margin-bottom: 16px;
+  }
+
+  .hero-mobile-flags-container {
+    max-width: 300px;
+    margin-bottom: 32px;
+  }
+
+  .hero-mobile-flags {
+    gap: 13px;
+    animation-duration: 22s;
+  }
+
+  .hero-mobile-flag {
+    width: 27px;
+    height: 27px;
+  }
+
+  .hero-tournament-bracket {
+    top: 86px;
+    width: calc(100vw + 28px);
+    height: 620px;
+    opacity: 0.54;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+  }
+
+  .hero-mobile-flags-container {
+    max-width: 280px;
+  }
+
+  .hero-mobile-flag {
+    width: 26px;
+    height: 26px;
+  }
+
+  .hero-cta {
+    gap: 10px;
+  }
+
+  .hero-mobile-trophy-stage {
+    width: min(100vw, 350px);
+  }
+
+  .hero-mobile-tournament-bracket {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-mobile-trophy {
+    width: 182px;
+  }
+}
+
+@media (max-height: 740px) and (max-width: 768px) {
+  .hero {
+    padding-top: 88px;
+    align-items: flex-start;
+  }
+
+  .hero .container {
+    align-items: flex-start;
+  }
+
+  .hero-content {
+    padding: 0;
+  }
+
+  .hero-title {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  .hero-mobile-trophy-stage {
+    width: min(100vw, 330px);
+    margin-bottom: 14px;
+  }
+
+  .hero-mobile-tournament-bracket {
+    width: 100%;
+    height: 100%;
+    opacity: 0.52;
+  }
+
+  .hero-mobile-trophy {
+    width: 148px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 14px;
+  }
+
+  .hero-mobile-flags-container {
+    max-width: 280px;
+    margin-bottom: 24px;
+    padding: 9px 0;
+  }
+
+  .hero-mobile-flags {
+    gap: 12px;
+    animation-duration: 20s;
+  }
+
+  .hero-mobile-flag {
+    width: 24px;
+    height: 24px;
+  }
+
+  .hero-tournament-bracket {
+    top: 70px;
+    height: 560px;
+    opacity: 0.46;
+  }
+
+  .hero-bracket-flag-ring {
+    stroke-width: 1.4;
+  }
+}
+
+@media (max-width: 375px) and (max-height: 667px) {
+  .hero {
+    padding-top: 80px;
+  }
+
+  .hero-title {
+    font-size: 26px;
+  }
+
+  .hero-mobile-trophy-stage {
+    width: min(100vw, 300px);
+    margin-bottom: 12px;
+  }
+
+  .hero-mobile-tournament-bracket {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-mobile-trophy {
+    width: 130px;
+  }
+
+  .hero-description {
+    margin-bottom: 12px;
+  }
+
+  .hero-mobile-flags-container {
+    max-width: 260px;
+    margin-bottom: 22px;
+    padding: 8px 0;
+  }
+
+  .hero-mobile-flags {
+    gap: 11px;
+    animation-duration: 18s;
+  }
+
+  .hero-mobile-flag {
+    width: 22px;
+    height: 22px;
+  }
+
+  .hero-tournament-bracket {
+    top: 62px;
+    height: 520px;
+    opacity: 0.42;
+  }
+}
+
+@keyframes heroMobileFlagsScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }

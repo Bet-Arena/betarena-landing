@@ -2,6 +2,7 @@
 .detailed-steps {
   background: transparent;
   padding: var(--spacing-section-features);
+  padding-bottom: 0;
   position: relative;
   overflow: visible;
   z-index: 5;
@@ -113,7 +114,7 @@
 /* Steps Container */
 .steps-container {
   position: relative;
-  min-height: 600px;
+  min-height: 520px;
   overflow: visible;
   width: 100%;
 }
@@ -127,7 +128,7 @@
   top: 0;
   left: 50%;
   width: 100%;
-  max-width: 1440px;
+  max-width: 1200px;
   box-sizing: border-box;
   transform: translateX(calc(-50% + 100%));
   opacity: 0;
@@ -323,18 +324,24 @@
 @media (max-width: 768px) {
   .detailed-steps {
     padding: var(--spacing-section-features);
-    padding-bottom: 80px;
+    padding-bottom: 32px;
   }
 
   .step-navigation {
     margin-bottom: 32px;
-    gap: 8px;
+    gap: 4px;
     width: 100%;
     max-width: 100%;
+    padding: 0 var(--spacing-container);
+    align-items: center;
+  }
+
+  .steps-container {
+    min-height: 420px;
   }
 
   .step-nav-btn {
-    padding: 10px 12px;
+    padding: 10px 6px;
     gap: 6px;
     flex: 1;
     min-width: 0;
@@ -348,20 +355,26 @@
 
   .step-nav-label {
     font-size: 11px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    text-align: center;
+    display: block;
   }
 
   .step-nav-line {
-    width: 24px;
+    width: 16px;
+    align-self: center;
     flex-shrink: 0;
   }
 
   .detailed-step {
     grid-template-columns: 1fr;
     gap: 0;
+    position: absolute;
+  }
+
+  .detailed-step.step-slide.active {
     position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .detailed-step.reverse {
@@ -383,4 +396,3 @@
   }
 
 }
-

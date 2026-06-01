@@ -96,10 +96,9 @@
 .team-logo {
   width: 64px;
   height: 64px;
-  font-size: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .team-name {

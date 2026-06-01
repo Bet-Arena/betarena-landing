@@ -17,7 +17,9 @@ export interface Messages {
     title: string
     highlightedTitle: string
     description: string
-    cta: string
+    bracketRounds: [string, string, string, string, string]
+    ctaPrimary: string
+    ctaSecondary: string
   }
   howItWorks: {
     title: string
@@ -39,10 +41,11 @@ export interface Messages {
       card: {
         title: string
         subtitle: string
-        levels: [string, string, string]
+        levels: string[]
         prizePoolLabel: string
         participantsLabel: string
         durationLabel: string
+        durationValue: string
         join: string
         ends: string
       }
@@ -75,6 +78,23 @@ export interface Messages {
     traditional: ComparisonFeature
     betarena: ComparisonFeature
     cta: string
+    scheduleTitle: string
+    scheduleSubtitle: string
+    scheduleRulesTitle: string
+    scheduleRules: string
+    scheduleFinalBadge: string
+    scheduleGuaranteeStamp: string
+    schedulePrizesNote: string
+    scheduleHeader: [string, string, string, string]
+    scheduleRows: Array<{
+      num: string
+      name: string
+      dates: string
+      details?: string
+      fee: string
+      prize: string
+      isFinal: boolean
+    }>
   }
   footer: {
     email: string
@@ -91,16 +111,18 @@ export const translations: Record<Locale, Messages> = {
       languageLabel: 'Переключатель языка',
     },
     hero: {
-      badge: 'Новый подход к спортивным ставкам',
-      title: 'Соревнуйтесь в турнирах,',
-      highlightedTitle: 'не рискуя большими деньгами',
-      description: 'Соревнуйтесь с другими участниками в турнирах.',
-      cta: 'Узнать больше',
+      badge: '⚽ FIFA World Cup 2026',
+      title: 'Прогнозируй на ЧМ 2026 —',
+      highlightedTitle: 'выигрывай призы',
+      description: 'Соревнуйся с другими участниками в турнирах по прогнозам. Без огромных рисков — только твои знания футбола.',
+      bracketRounds: ['1/16', '1/8', '1/4', '1/2', 'Финал'],
+      ctaPrimary: 'Зарегистрироваться',
+      ctaSecondary: 'Узнать больше',
     },
     howItWorks: {
       title: 'Как это работает',
       subtitle: 'Три простых шага от регистрации до победы в турнире',
-      navigation: ['Войти в турнир', 'Делать ставки', 'Лидерборд'],
+      navigation: ['Войти в турнир', 'Делать прогнозы', 'Лидерборд'],
     },
     steps: {
       leaderboardTitle: 'Лидерборд',
@@ -108,47 +130,48 @@ export const translations: Record<Locale, Messages> = {
       pointsLabel: 'очков',
       correctLabel: 'верно',
       newParticipant: 'Новый участник!',
-      whyBetarena: 'Почему BetArena →',
+      whyBetarena: 'Зарегистрироваться',
       step1: {
         badge: 'Шаг 1',
-        heading: 'Войдите в турнир',
-        text: 'Выберите интересующий вас турнир из списка доступных. Каждый турнир имеет свой призовой фонд, количество участников и длительность. Выберите уровень участия, который вам подходит — от начального до премиум. Вступительный взнос списывается с вашего баланса один раз при вступлении.',
+        heading: 'Войдите в турнир ЧМ 2026',
+        text: 'Выберите турнир по Чемпионату мира 2026 из списка доступных. Каждый турнир имеет свой призовой фонд, количество участников и длительность. Будут доступны как бесплатные этапы, так и платный финальный турнир. Вступительный взнос списывается один раз при вступлении.',
         features: [
-          'Разные уровни участия на любой бюджет',
+          'Бесплатные и платные турниры',
           'Прозрачные правила и условия',
           'Мгновенный доступ после вступления',
         ],
         card: {
-          title: 'Финал Лиги чемпионов',
-          subtitle: 'Спрогнозируйте победителя и счет',
-          levels: ['Бронза', 'Серебро', 'Золото'],
+          title: 'FIFA World Cup 2026',
+          subtitle: 'Предсказывай победителя и счёт матчей ЧМ',
+          levels: ['Золото'],
           prizePoolLabel: 'призовой фонд',
           participantsLabel: 'участников',
           durationLabel: 'длительность',
+          durationValue: '43 дня',
           join: 'Войти в турнир',
-          ends: 'До конца: 18 июня 2026',
+          ends: 'До конца: 19 июля 2026',
         },
       },
       step2: {
         badge: 'Шаг 2',
-        heading: 'Делайте ставки',
-        text: 'После вступления в турнир вы получаете доступ ко всем матчам. Выберите матч, изучите доступные рынки (исход, счет, тотал голов и другие) и выберите исход, в который вы верите. Добавьте его в купон. Вы можете делать одиночные ставки или собирать экспрессы из нескольких исходов.',
+        heading: 'Делайте прогнозы на матчи ЧМ',
+        text: 'После вступления в турнир вы получаете доступ к матчам турнира. Выберите матч, изучите доступные рынки (исход, счёт, тотал голов и другие) и выберите исход, в который вы верите. Добавьте его в купон. Вы можете делать одиночные прогнозы или собирать экспрессы из нескольких исходов.',
         features: [
           'Множество рынков на каждый матч',
-          'Одиночные ставки и экспрессы',
+          'Одиночные прогнозы и экспрессы',
           'Простое добавление в купон одним кликом',
         ],
         card: {
-          league: 'Премьер-лига',
+          league: 'FIFA World Cup 2026',
           live: 'Live',
           date: 'Сегодня',
-          teams: ['Ман. Сити', 'Челси'],
-          confirm: 'Сделать ставку',
+          teams: ['Португалия', 'Аргентина'],
+          confirm: 'Сделать прогноз',
         },
       },
       step3: {
         badge: 'Шаг 3',
-        heading: 'Следите за лидербордом',
+        heading: 'Следите за лидербордом и побеждайте',
         text: 'За каждый правильный прогноз вы получаете очки. Чем точнее ваш прогноз, тем больше очков вы зарабатываете. Лидерборд обновляется в реальном времени после каждого завершенного матча. Топ игроки получают призы из призового фонда турнира. Следите за своей позицией и стремитесь к вершине!',
         features: [
           'Очки за каждый правильный прогноз',
@@ -160,31 +183,42 @@ export const translations: Record<Locale, Messages> = {
       },
     },
     whyUs: {
-      title: 'Почему BETARENA?',
+      title: 'Почему BetArena для ЧМ 2026?',
       subtitle: 'Мы отличаемся от традиционных букмекеров',
       traditional: {
-        title: 'Традиционные букмекеры',
+        title: 'Классические букмекеры',
         subtitle: 'Winline и другие',
         items: [
-          'Риск потерять большие деньги на каждом матче',
-          'Высокие минимальные ставки',
-          'Нет соревновательного элемента',
-          'Сложно начать новичкам',
-          'Нет контроля над расходами',
+          'Один неудачный вечер может уничтожить весь банк',
+          'Классические букмекеры зарабатывают на проигрышах игроков',
+          'Ставки легко превращаются в бесконечную попытку отыграться',
+          'Большой выигрыш почти всегда требует большого риска',
         ],
       },
       betarena: {
         title: 'BetArena',
         subtitle: 'Наш подход',
         items: [
-          'Защита от больших потерь — фиксированный вступительный взнос',
-          'Низкий порог входа — от $10',
-          'Соревнование в лидерборде с другими участниками',
-          'Простой и понятный интерфейс для всех',
-          'Полный контроль над расходами',
+          'Один вход вместо бесконечных депозитов',
+          'Один неудачный матч не выбивает из борьбы',
+          'Игроки соревнуются друг с другом, а не против системы',
+          'Бесплатные турниры с реальными призами',
         ],
       },
-      cta: 'Регистрация',
+      cta: 'Как это работает',
+      scheduleTitle: 'Расписание турниров',
+      scheduleSubtitle: 'Три этапа — от группового до финала',
+      scheduleRulesTitle: 'Изучите правила перед стартом',
+      scheduleRules: 'Турниры могут отличаться по количеству матчей, прогнозов и формату участия.',
+      scheduleFinalBadge: '🏆 ФИНАЛ',
+      scheduleGuaranteeStamp: '✓ Гарантировано',
+      schedulePrizesNote: '🎟️ Среди призов — гарантированные выплаты и билеты на финал ЧМ',
+      scheduleHeader: ['Этап', 'Даты', 'Взнос', 'Призовой фонд'],
+      scheduleRows: [
+        { num: '1', name: 'Групповой этап', dates: '11 июня – 28 июня 2026', details: '6 турниров', fee: 'Бесплатно', prize: '$600 на каждый турнир', isFinal: false },
+        { num: '2', name: '1/16 финала', dates: '3 – 6 июля 2026', details: '2 турнира', fee: 'Бесплатно', prize: '$700 на каждый турнир', isFinal: false },
+        { num: '3', name: 'Финальная стадия (1/8 – Финал)', dates: '7 – 19 июля 2026', fee: '$10', prize: '$20 000+', isFinal: true },
+      ],
     },
     footer: {
       email: 'Email',
@@ -199,16 +233,18 @@ export const translations: Record<Locale, Messages> = {
       languageLabel: 'Language switcher',
     },
     hero: {
-      badge: 'A new approach to sports betting',
-      title: 'Compete in tournaments,',
-      highlightedTitle: 'without risking big money',
-      description: 'Compete with other participants in tournaments.',
-      cta: 'Learn more',
+      badge: '⚽ FIFA World Cup 2026',
+      title: 'Predict on World Cup 2026 —',
+      highlightedTitle: 'win prizes',
+      description: 'Compete with others in prediction tournaments. Without huge risks — just your football knowledge.',
+      bracketRounds: ['R32', 'R16', 'QF', 'SF', 'Final'],
+      ctaPrimary: 'Sign up',
+      ctaSecondary: 'Learn more',
     },
     howItWorks: {
       title: 'How it works',
       subtitle: 'Three simple steps from signup to winning a tournament',
-      navigation: ['Join a tournament', 'Place bets', 'Leaderboard'],
+      navigation: ['Join a tournament', 'Place predictions', 'Leaderboard'],
     },
     steps: {
       leaderboardTitle: 'Leaderboard',
@@ -216,47 +252,48 @@ export const translations: Record<Locale, Messages> = {
       pointsLabel: 'points',
       correctLabel: 'correct',
       newParticipant: 'New participant!',
-      whyBetarena: 'Why BetArena →',
+      whyBetarena: 'Sign up',
       step1: {
         badge: 'Step 1',
-        heading: 'Join a tournament',
-        text: 'Choose the tournament that fits you from the list of available events. Each tournament has its own prize pool, participant count, and duration. Pick the entry level that matches your budget, from starter to premium. The entry fee is charged from your balance once when you join.',
+        heading: 'Join a World Cup 2026 tournament',
+        text: 'Choose the FIFA World Cup 2026 tournament that fits you from the list of available events. Each tournament has its own prize pool, participant count, and duration. Both free stages and a paid final tournament will be available. The entry fee is charged once when you join.',
         features: [
-          'Different entry levels for any budget',
+          'Free and paid tournaments',
           'Transparent rules and conditions',
           'Instant access right after joining',
         ],
         card: {
-          title: 'Champions League Final',
-          subtitle: 'Predict the winner and the score',
-          levels: ['Bronze', 'Silver', 'Gold'],
+          title: 'FIFA World Cup 2026',
+          subtitle: 'Predict the winner and score of World Cup matches',
+          levels: ['Gold'],
           prizePoolLabel: 'prize pool',
           participantsLabel: 'participants',
           durationLabel: 'duration',
+          durationValue: '43 days',
           join: 'Join tournament',
-          ends: 'Ends: Jun 18, 2026',
+          ends: 'Ends: Jul 19, 2026',
         },
       },
       step2: {
         badge: 'Step 2',
-        heading: 'Place bets',
-        text: 'After joining a tournament, you get access to all matches. Pick a match, review the available markets such as outcome, score, total goals, and more, then choose the result you believe in. Add it to your slip. You can place singles or build accumulators from several picks.',
+        heading: 'Place predictions on World Cup matches',
+        text: 'After joining a tournament, you get access to tournament matches. Pick a match, review the available markets such as outcome, score, total goals, and more, then choose the result you believe in. Add it to your slip. You can place singles or build accumulators from several picks.',
         features: [
           'Multiple markets for every match',
-          'Singles and accumulator bets',
+          'Singles and accumulator predictions',
           'One-click slip selection',
         ],
         card: {
-          league: 'Premier League',
+          league: 'FIFA World Cup 2026',
           live: 'Live',
           date: 'Today',
-          teams: ['Man. City', 'FC Chelsea'],
-          confirm: 'Place bet',
+          teams: ['Portugal', 'Argentina'],
+          confirm: 'Place prediction',
         },
       },
       step3: {
         badge: 'Step 3',
-        heading: 'Track the leaderboard',
+        heading: 'Track the leaderboard and win',
         text: 'You earn points for every correct prediction. The more accurate your pick is, the more points you score. The leaderboard updates in real time after every finished match. Top players win prizes from the tournament pool. Track your position and push for the top.',
         features: [
           'Points for every correct prediction',
@@ -268,31 +305,42 @@ export const translations: Record<Locale, Messages> = {
       },
     },
     whyUs: {
-      title: 'Why BETARENA?',
+      title: 'Why BetArena for World Cup 2026?',
       subtitle: 'We are different from traditional bookmakers',
       traditional: {
-        title: 'Traditional bookmakers',
+        title: 'Classic bookmakers',
         subtitle: 'Winline and others',
         items: [
-          'Risk of losing large sums on every match',
-          'High minimum stakes',
-          'No competitive layer',
-          'Hard for newcomers to start',
-          'No spending control',
+          'One bad evening can wipe out your entire bankroll',
+          'Traditional bookmakers profit from player losses',
+          'Bets easily turn into an endless chase to win back',
+          'Big wins almost always require big risks',
         ],
       },
       betarena: {
         title: 'BetArena',
         subtitle: 'Our approach',
         items: [
-          'Protection from heavy losses with a fixed entry fee',
-          'Low entry threshold starting from $10',
-          'Leaderboard competition with other participants',
-          'A simple and clear interface for everyone',
-          'Full control over spending',
+          'One entry instead of endless deposits',
+          'One bad match doesn\'t knock you out of contention',
+          'Players compete against each other, not the system',
+          'Free tournaments with real prizes',
         ],
       },
-      cta: 'Sign up',
+      cta: 'How it works',
+      scheduleTitle: 'Tournament Schedule',
+      scheduleSubtitle: 'Three stages — from group stage to final',
+      scheduleRulesTitle: 'Study the rules before the start',
+      scheduleRules: 'Tournaments can differ by number of matches, predictions, and participation format.',
+      scheduleFinalBadge: '🏆 FINAL',
+      scheduleGuaranteeStamp: '✓ Guaranteed',
+      schedulePrizesNote: '🎟️ Among prizes — guaranteed payouts and World Cup final tickets',
+      scheduleHeader: ['Stage', 'Dates', 'Entry Fee', 'Prize Pool'],
+      scheduleRows: [
+        { num: '1', name: 'Group Stage', dates: 'Jun 11 – 28, 2026', details: '6 tournaments', fee: 'Free', prize: '$600 per tournament', isFinal: false },
+        { num: '2', name: 'Round of 32', dates: 'Jul 3 – 6, 2026', details: '2 tournaments', fee: 'Free', prize: '$700 per tournament', isFinal: false },
+        { num: '3', name: 'Final Stage (R16 – Final)', dates: 'Jul 7 – 19, 2026', fee: '$10', prize: '$20,000+', isFinal: true },
+      ],
     },
     footer: {
       email: 'Email',

@@ -27,30 +27,28 @@ export function Step1({ isActive, onNavigate }: Step1Props) {
         <div className="app-card tournament-card">
           <div className="tournament-card-header">
             <div className="tournament-logo">
-            <div className="logo-placeholder">🏆</div>
-          </div>
-          <div className="tournament-info">
+              <img className="logo-img" src="/fifa-wc26-logo.png" alt="FIFA World Cup 2026" draggable={false} />
+            </div>
+            <div className="tournament-info">
               <h3 className="tournament-name">{step.card.title}</h3>
               <p className="tournament-subtitle">{step.card.subtitle}</p>
               <div className="level-badges">
-                <span className="badge badge-bronze">{step.card.levels[0]}</span>
-                <span className="badge badge-silver">{step.card.levels[1]}</span>
-                <span className="badge badge-gold">{step.card.levels[2]}</span>
+                <span className="badge badge-gold">{step.card.levels[0]}</span>
               </div>
             </div>
           </div>
           <div className="divider"></div>
           <div className="tournament-stats">
             <div className="stat-box">
-              <p className="stat-value">8,500$</p>
+              <p className="stat-value">25 000$</p>
               <p className="stat-label">{step.card.prizePoolLabel}</p>
             </div>
             <div className="stat-box">
-              <p className="stat-value">1,401</p>
+              <p className="stat-value">10 247</p>
               <p className="stat-label">{step.card.participantsLabel}</p>
             </div>
             <div className="stat-box">
-              <p className="stat-value">2h 15min</p>
+              <p className="stat-value">{step.card.durationValue}</p>
               <p className="stat-label">{step.card.durationLabel}</p>
             </div>
           </div>

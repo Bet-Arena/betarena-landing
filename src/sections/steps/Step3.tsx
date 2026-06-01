@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useI18n } from '../../i18n/useI18n'
+import { appEnv } from '../../config/env'
 import './Step3.css'
 
 interface Step3Props {
   isActive: boolean
-  onNavigate: (sectionId: string) => void
 }
 
 const getInitials = (name: string): string => {
@@ -25,56 +25,34 @@ const formatPoints = (points: number): string => {
 const getMedalIcon = (rank: number) => {
   if (rank > 3) return null
 
-  const medalColor = rank === 1 ? '#fbbf24' : rank === 2 ? '#9ca3af' : '#cd7f32'
+  const medalColor = rank === 1 ? '#fbbf24' : rank === 2 ? '#e5e7eb' : '#cd7f32'
 
   return (
     <div className="medal-icon">
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        style={{
+          width: '28px',
+          height: '28px',
+          borderRadius: '50%',
+          background: medalColor,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px',
+          fontWeight: 700,
+          color: rank === 2 ? '#1f2937' : '#fff',
+          boxShadow: `0 0 12px ${medalColor}66`,
+        }}
       >
-        <path
-          d="M7.685 8.062a3 3 0 0 1-.185-4.224l.211-.253a3.25 3.25 0 0 1 4.846-.015l3.614 4.198a3.25 3.25 0 0 1 .598 2.68l-.996 5.376a2 2 0 0 1-1.963 1.598H8.81a2 2 0 0 1-1.962-1.598l-.996-5.376a3 3 0 0 1 .833-2.548Z"
-          fill={medalColor}
-          fillOpacity="0.2"
-          stroke={medalColor}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M16.315 8.062a3 3 0 0 0 .185-4.224l-.211-.253a3.25 3.25 0 0 0-4.846-.015l-3.614 4.198a3.25 3.25 0 0 0-.598 2.68l.996 5.376a2 2 0 0 0 1.963 1.598h4.147a2 2 0 0 0 1.962-1.598l.996-5.376a3 3 0 0 0-.833-2.548Z"
-          fill={medalColor}
-          fillOpacity="0.2"
-          stroke={medalColor}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M12 8v6"
-          stroke={medalColor}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+        {rank}
+      </div>
     </div>
   )
 }
 
-export function Step3({ isActive, onNavigate }: Step3Props) {
-  const [buttonClicked, setButtonClicked] = useState(false)
+export function Step3({ isActive }: Step3Props) {
   const [localShowNewUser, setLocalShowNewUser] = useState(false)
   const { messages } = useI18n()
-
-  const handleClick = () => {
-    setButtonClicked(true)
-    onNavigate('why-us')
-  }
 
   useEffect(() => {
     if (isActive) {
@@ -138,12 +116,17 @@ export function Step3({ isActive, onNavigate }: Step3Props) {
             </div>
           </div>
         </div>
-        <button
-          className={`btn-primary step3-mobile-btn ${buttonClicked ? 'no-pulse' : ''}`}
-          onClick={handleClick}
+        <a
+          className="btn-primary step3-mobile-btn"
+          href={appEnv.registerUrl ?? undefined}
+          onClick={(event) => {
+            if (!appEnv.registerUrl) {
+              event.preventDefault()
+            }
+          }}
         >
           {messages.steps.whyBetarena}
-        </button>
+        </a>
       </div>
       <div className="step-content">
         <div className="step-badge">{messages.steps.step3.badge}</div>
@@ -163,12 +146,17 @@ export function Step3({ isActive, onNavigate }: Step3Props) {
             <span>{messages.steps.step3.features[2]}</span>
           </li>
         </ul>
-        <button
-          className={`btn-primary step3-desktop-btn ${buttonClicked ? 'no-pulse' : ''}`}
-          onClick={handleClick}
+        <a
+          className="btn-primary step3-desktop-btn"
+          href={appEnv.registerUrl ?? undefined}
+          onClick={(event) => {
+            if (!appEnv.registerUrl) {
+              event.preventDefault()
+            }
+          }}
         >
           {messages.steps.whyBetarena}
-        </button>
+        </a>
       </div>
     </div>
   )
