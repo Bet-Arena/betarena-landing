@@ -114,7 +114,7 @@
 /* Steps Container */
 .steps-container {
   position: relative;
-  min-height: 600px;
+  min-height: 520px;
   overflow: visible;
   width: 100%;
 }
@@ -324,7 +324,7 @@
 @media (max-width: 768px) {
   .detailed-steps {
     padding: var(--spacing-section-features);
-    padding-bottom: 0;
+    padding-bottom: 32px;
   }
 
   .step-navigation {
@@ -334,6 +334,10 @@
     max-width: 100%;
     padding: 0 var(--spacing-container);
     align-items: center;
+  }
+
+  .steps-container {
+    min-height: 420px;
   }
 
   .step-nav-btn {
@@ -364,7 +368,13 @@
   .detailed-step {
     grid-template-columns: 1fr;
     gap: 0;
+    position: absolute;
+  }
+
+  .detailed-step.step-slide.active {
     position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .detailed-step.reverse {

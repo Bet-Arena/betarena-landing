@@ -81,7 +81,7 @@ export interface Messages {
     scheduleTitle: string
     scheduleSubtitle: string
     scheduleRulesTitle: string
-    scheduleRules: [string, string, string]
+    scheduleRules: string
     scheduleFinalBadge: string
     scheduleGuaranteeStamp: string
     schedulePrizesNote: string
@@ -90,6 +90,7 @@ export interface Messages {
       num: string
       name: string
       dates: string
+      details?: string
       fee: string
       prize: string
       isFinal: boolean
@@ -207,19 +208,15 @@ export const translations: Record<Locale, Messages> = {
       cta: 'Как это работает',
       scheduleTitle: 'Расписание турниров',
       scheduleSubtitle: 'Три этапа — от группового до финала',
-      scheduleRulesTitle: 'У каждого турнира свои правила',
-      scheduleRules: [
-        'Количество прогнозов на турнир задаётся отдельно',
-        'Лимиты прогнозов на матч зависят от этапа',
-        'Формат бесплатных и платных турниров может отличаться',
-      ],
+      scheduleRulesTitle: 'Изучите правила перед стартом',
+      scheduleRules: 'Турниры могут отличаться по количеству матчей, прогнозов и формату участия.',
       scheduleFinalBadge: '🏆 ФИНАЛ',
       scheduleGuaranteeStamp: '✓ Гарантировано',
       schedulePrizesNote: '🎟️ Среди призов — гарантированные выплаты и билеты на финал ЧМ',
       scheduleHeader: ['Этап', 'Даты', 'Взнос', 'Призовой фонд'],
       scheduleRows: [
-        { num: '1', name: 'Групповой этап', dates: 'Скоро', fee: 'Бесплатно', prize: '$500', isFinal: false },
-        { num: '2', name: '1/16 финала', dates: '3 – 6 июля 2026', fee: 'Бесплатно', prize: '$500', isFinal: false },
+        { num: '1', name: 'Групповой этап', dates: '11 июня – 28 июня 2026', details: '6 турниров', fee: 'Бесплатно', prize: '$600 на каждый турнир', isFinal: false },
+        { num: '2', name: '1/16 финала', dates: '3 – 6 июля 2026', details: '2 турнира', fee: 'Бесплатно', prize: '$700 на каждый турнир', isFinal: false },
         { num: '3', name: 'Финальная стадия (1/8 – Финал)', dates: '7 – 19 июля 2026', fee: '$10', prize: '$20 000+', isFinal: true },
       ],
     },
@@ -333,19 +330,15 @@ export const translations: Record<Locale, Messages> = {
       cta: 'How it works',
       scheduleTitle: 'Tournament Schedule',
       scheduleSubtitle: 'Three stages — from group stage to final',
-      scheduleRulesTitle: 'Every tournament has its own rules',
-      scheduleRules: [
-        'Prediction limits per tournament are configured separately',
-        'Prediction limits per match depend on the stage',
-        'Free and paid tournaments can use different formats',
-      ],
+      scheduleRulesTitle: 'Study the rules before the start',
+      scheduleRules: 'Tournaments can differ by number of matches, predictions, and participation format.',
       scheduleFinalBadge: '🏆 FINAL',
       scheduleGuaranteeStamp: '✓ Guaranteed',
       schedulePrizesNote: '🎟️ Among prizes — guaranteed payouts and World Cup final tickets',
       scheduleHeader: ['Stage', 'Dates', 'Entry Fee', 'Prize Pool'],
       scheduleRows: [
-        { num: '1', name: 'Group Stage', dates: 'Coming soon', fee: 'Free', prize: '$500', isFinal: false },
-        { num: '2', name: 'Round of 32', dates: 'Jul 3 – 6, 2026', fee: 'Free', prize: '$500', isFinal: false },
+        { num: '1', name: 'Group Stage', dates: 'Jun 11 – 28, 2026', details: '6 tournaments', fee: 'Free', prize: '$600 per tournament', isFinal: false },
+        { num: '2', name: 'Round of 32', dates: 'Jul 3 – 6, 2026', details: '2 tournaments', fee: 'Free', prize: '$700 per tournament', isFinal: false },
         { num: '3', name: 'Final Stage (R16 – Final)', dates: 'Jul 7 – 19, 2026', fee: '$10', prize: '$20,000+', isFinal: true },
       ],
     },

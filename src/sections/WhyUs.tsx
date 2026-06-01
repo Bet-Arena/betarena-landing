@@ -1,4 +1,3 @@
-import { Gauge, ListChecks, SlidersHorizontal } from 'lucide-react'
 import { GlowEffect } from '../components/ui/GlowEffect'
 import { CheckIcon } from '../components/ui/CheckIcon'
 import { CrossIcon } from '../components/ui/CrossIcon'
@@ -10,8 +9,6 @@ interface WhyUsProps {
   isVisible?: Record<string, boolean>
   onNavigate?: (sectionId: string) => void
 }
-
-const SCHEDULE_RULE_ICONS = [ListChecks, Gauge, SlidersHorizontal]
 
 function stripLeadingMarker(value: string) {
   return value.replace(/^[^\p{L}\p{N}$]+/u, '').trim()
@@ -113,26 +110,11 @@ export function WhyUs({ sectionRef, isVisible = {}, onNavigate }: WhyUsProps) {
               <div className="schedule-rules-header">
                 <div className="schedule-rules-title">{messages.whyUs.scheduleRulesTitle}</div>
               </div>
-              <div className="schedule-rules-list">
-                {messages.whyUs.scheduleRules.map((rule, index) => (
-                  <div key={rule} className="schedule-rule">
-                    <div className="schedule-rule-icon">
-                      {(() => {
-                        const Icon = SCHEDULE_RULE_ICONS[index] ?? SlidersHorizontal
-                        return <Icon size={17} strokeWidth={2} />
-                      })()}
-                    </div>
-                    <div className="schedule-rule-copy">
-                      <span className="schedule-rule-index">0{index + 1}</span>
-                      <span>{rule}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <p className="schedule-rules-copy">{messages.whyUs.scheduleRules}</p>
             </div>
             <div className="schedule-cards">
               {messages.whyUs.scheduleRows.map((row) => (
-                <div key={row.num} className={`schedule-card ${row.isFinal ? 'final' : ''}`}>
+                <div key={row.num} className={`schedule-card ${row.isFinal ? 'final' : ''} ${row.details ? 'has-details' : ''}`}>
                   {row.isFinal && <span className="final-badge">{stripLeadingMarker(messages.whyUs.scheduleFinalBadge)}</span>}
                   <div className="schedule-card-top">
                     <span className="schedule-card-num">{row.num}</span>
@@ -141,6 +123,7 @@ export function WhyUs({ sectionRef, isVisible = {}, onNavigate }: WhyUsProps) {
                     </div>
                   </div>
                   <div className="schedule-card-dates">{row.dates}</div>
+                  {row.details && <div className="schedule-card-details">{row.details}</div>}
                   <div className="schedule-card-footer">
                     <div className="schedule-card-fee">
                       <span className="fee-label">{messages.whyUs.scheduleHeader[2]}</span>
