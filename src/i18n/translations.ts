@@ -187,7 +187,7 @@ export const translations: Record<Locale, Messages> = {
       subtitle: 'Мы отличаемся от традиционных букмекеров',
       traditional: {
         title: 'Классические букмекеры',
-        subtitle: 'Winline и другие',
+        subtitle: 'Другие',
         items: [
           'Один неудачный вечер может уничтожить весь банк',
           'Классические букмекеры зарабатывают на проигрышах игроков',
@@ -212,7 +212,7 @@ export const translations: Record<Locale, Messages> = {
       scheduleRules: 'Турниры могут отличаться по количеству матчей, прогнозов и формату участия.',
       scheduleFinalBadge: '🏆 ФИНАЛ',
       scheduleGuaranteeStamp: '✓ Гарантировано',
-      schedulePrizesNote: '🎟️ Среди призов — гарантированные выплаты и билеты на финал ЧМ',
+      schedulePrizesNote: '🎟️ Среди призов — гарантированные выплаты и билеты в финальный турнир BetArena',
       scheduleHeader: ['Этап', 'Даты', 'Взнос', 'Призовой фонд'],
       scheduleRows: [
         { num: '1', name: 'Групповой этап', dates: '11 июня – 28 июня 2026', details: '6 турниров', fee: 'Бесплатно', prize: '$600 на каждый турнир', isFinal: false },
@@ -309,7 +309,7 @@ export const translations: Record<Locale, Messages> = {
       subtitle: 'We are different from traditional bookmakers',
       traditional: {
         title: 'Classic bookmakers',
-        subtitle: 'Winline and others',
+        subtitle: 'Others',
         items: [
           'One bad evening can wipe out your entire bankroll',
           'Traditional bookmakers profit from player losses',
@@ -334,7 +334,7 @@ export const translations: Record<Locale, Messages> = {
       scheduleRules: 'Tournaments can differ by number of matches, predictions, and participation format.',
       scheduleFinalBadge: '🏆 FINAL',
       scheduleGuaranteeStamp: '✓ Guaranteed',
-      schedulePrizesNote: '🎟️ Among prizes — guaranteed payouts and World Cup final tickets',
+      schedulePrizesNote: '🎟️ Among prizes — guaranteed payouts and tickets to the BetArena final tournament',
       scheduleHeader: ['Stage', 'Dates', 'Entry Fee', 'Prize Pool'],
       scheduleRows: [
         { num: '1', name: 'Group Stage', dates: 'Jun 11 – 28, 2026', details: '6 tournaments', fee: 'Free', prize: '$600 per tournament', isFinal: false },
