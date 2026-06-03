@@ -333,7 +333,7 @@
     width: 100%;
     max-width: 100%;
     padding: 0 var(--spacing-container);
-    align-items: center;
+    align-items: stretch;
   }
 
   .steps-container {
@@ -345,6 +345,8 @@
     gap: 6px;
     flex: 1;
     min-width: 0;
+    min-height: 76px;
+    justify-content: center;
   }
 
   .step-nav-number {
